@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Periodic Table Launcher</string>
+    <string name="vowels_eng">[aeiou]</string>
+    <string name="vowels_rus">[уеыаоэяиюё]</string>
+    <string name="item_subtitle_error">no data</string>
+    <string name="item_title_error"> </string>
+
+</resources>
