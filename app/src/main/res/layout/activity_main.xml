@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.ActivityMain">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="matrix" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvItems"
         android:layout_width="match_parent"
