@@ -2,4 +2,8 @@
 <resources>
     <integer name="columns">2</integer>
     <integer name="subtitle_lines">3</integer>
+
+    <integer name="text_shadow_dy">1</integer>
+    <integer name="text_shadow_dx">0</integer>
+    <integer name="text_shadow_radius">4</integer>
 </resources>
