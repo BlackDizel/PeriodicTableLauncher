@@ -4,5 +4,8 @@
     <string name="vowels_rus">[уеыаоэяиюё]</string>
     <string name="item_subtitle_error">no data</string>
     <string name="item_title_error"> </string>
+    <string name="item_options_info">INFO</string>
+    <string name="item_options_remove">REMOVE</string>
+    <string name="item_options_edit">EDIT</string>
 
 </resources>

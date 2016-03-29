@@ -2,4 +2,5 @@
 <resources>
     <dimen name="item_title_padding_horizontal">16dp</dimen>
     <dimen name="item_margin">8dp</dimen>
+    <dimen name="item_options_padding">20dp</dimen>
 </resources>
