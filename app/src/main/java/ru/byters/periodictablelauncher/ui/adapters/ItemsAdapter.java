@@ -12,6 +12,7 @@ import android.widget.TextView;
 import ru.byters.periodictablelauncher.R;
 import ru.byters.periodictablelauncher.controllers.ControllerItems;
 import ru.byters.periodictablelauncher.models.AppDetail;
+import ru.byters.periodictablelauncher.ui.dialogs.ItemOptionsDialog;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
 
@@ -27,16 +28,18 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.setData(position);
-    }
-
-    @Override
     public int getItemCount() {
         return ControllerItems.getSize(context);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.setData(position);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener
+            , View.OnLongClickListener {
 
         TextView tvTitle;
         TextView tvSubtitle;
@@ -45,6 +48,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
             name = "";
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
             tvSubtitle = (TextView) itemView.findViewById(R.id.tvSubtitle);
@@ -68,6 +72,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             if (TextUtils.isEmpty(name)) return;
             Intent intent = ControllerItems.getLauncherIntent(context, name);
             context.startActivity(intent);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            if (TextUtils.isEmpty(name)) return true;
+            new ItemOptionsDialog(v.getContext(), name).show();
+            return true;
         }
     }
 }
