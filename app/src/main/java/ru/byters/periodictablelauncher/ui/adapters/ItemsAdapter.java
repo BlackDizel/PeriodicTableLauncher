@@ -1,7 +1,5 @@
 package ru.byters.periodictablelauncher.ui.adapters;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,25 +9,21 @@ import android.widget.TextView;
 
 import ru.byters.periodictablelauncher.R;
 import ru.byters.periodictablelauncher.controllers.ControllerItems;
+import ru.byters.periodictablelauncher.controllers.Core;
 import ru.byters.periodictablelauncher.models.AppDetail;
 import ru.byters.periodictablelauncher.ui.dialogs.ItemOptionsDialog;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
 
-    private Context context;
-
-    public ItemsAdapter(Context context) {
-        this.context = context;
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.view_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.view_item, parent, false));
     }
 
     @Override
     public int getItemCount() {
-        return ControllerItems.getSize(context);
+        return ControllerItems.getInstance().getSize();
     }
 
     @Override
@@ -37,7 +31,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         holder.setData(position);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
+    class ViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener
             , View.OnLongClickListener {
 
@@ -45,7 +39,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         TextView tvSubtitle;
         String name;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -55,7 +49,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         }
 
         public void setData(int position) {
-            AppDetail item = ControllerItems.getItem(context, position);
+            AppDetail item = ControllerItems.getInstance().getItem(position);
             if (item == null) {
                 name = "";
                 tvTitle.setText(R.string.item_title_error);
@@ -70,8 +64,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         @Override
         public void onClick(View v) {
             if (TextUtils.isEmpty(name)) return;
-            Intent intent = ControllerItems.getLauncherIntent(context, name);
-            context.startActivity(intent);
+            Core.getInstance().startActivity(name);
         }
 
         @Override
