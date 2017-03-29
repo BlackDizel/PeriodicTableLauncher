@@ -52,7 +52,8 @@ public class Core extends Application {
         ArrayList<AppDetail> result = new ArrayList<>();
         for (AppDetail itemLeft : left) {
             String name = itemLeft.getName();
-            result.add(right.containsKey(name) ? right.get(name) : itemLeft);
+            AppDetail item = right.containsKey(name) ? right.get(name) : itemLeft;
+            if (!result.contains(item)) result.add(item);
         }
         return result;
     }
