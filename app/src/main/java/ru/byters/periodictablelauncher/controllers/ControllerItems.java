@@ -56,6 +56,11 @@ public class ControllerItems {
         return selectedItem == null ? null : selectedItem.getTitle();
     }
 
+    public void setSelectedItemTitle(String title) {
+        if (selectedItem == null) return;
+        selectedItem.setTitle(title);
+    }
+
     public boolean isSelectedItemExist() {
         return selectedItem != null;
     }
@@ -66,5 +71,14 @@ public class ControllerItems {
 
     public void setSelectedItem(@Nullable AppDetail item) {
         selectedItem = item;
+    }
+
+    public int getSelectedItemColor() {
+        return selectedItem == null ? AppDetail.NO_VALUE : selectedItem.getColor();
+    }
+
+    public void setSelectedItemColor(int color) {
+        if (selectedItem == null) return;
+        selectedItem.setColor(color);
     }
 }
