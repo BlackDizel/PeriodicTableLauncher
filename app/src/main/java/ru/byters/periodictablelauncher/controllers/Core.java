@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,12 +60,11 @@ public class Core extends Application {
         String buffer = label.toLowerCase().replaceAll(getString(R.string.vowels_eng), "");
         buffer = buffer.replaceAll(" ", "");
         buffer = buffer.replaceAll(getString(R.string.vowels_rus), "");
-        buffer = buffer.substring(0, Math.min(2, buffer.length()));
-        if (buffer.length() > 0)
+        buffer = buffer.substring(0, Math.min(AppDetail.MAX_ITEM_TITLE_LENGTH, buffer.length()));
+        if (buffer.length() > 1)
             buffer = Character.toUpperCase(buffer.charAt(0)) + buffer.substring(1);
 
-        if (TextUtils.isEmpty(buffer))
-            buffer = "Nn";
+        //empty strings allowed
         return buffer;
     }
 
