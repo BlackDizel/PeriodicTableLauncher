@@ -1,6 +1,8 @@
 package ru.byters.periodictablelauncher.models;
 
-public class AppDetail implements Comparable {
+import java.io.Serializable;
+
+public class AppDetail implements Comparable, Serializable {
     public static final int NO_VALUE = -1;
     public static final int MAX_ITEM_TITLE_LENGTH = 2;
     private String label;

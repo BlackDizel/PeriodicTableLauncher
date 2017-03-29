@@ -27,10 +27,6 @@ public class ControllerItems {
         return instance;
     }
 
-    void init() {
-        updateData();
-    }
-
     @Nullable
     public AppDetail getItem(int position) {
         if (data == null || position < 0 || position >= data.size())
@@ -42,7 +38,7 @@ public class ControllerItems {
         return data == null ? 0 : data.size();
     }
 
-    private void updateData() {
+    public void updateData() {
         data = Core.getInstance().getApps();
     }
 
@@ -80,5 +76,9 @@ public class ControllerItems {
     public void setSelectedItemColor(int color) {
         if (selectedItem == null) return;
         selectedItem.setColor(color);
+    }
+
+    public void storeData() {
+        Core.getInstance().storeData(data);
     }
 }

@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import ru.byters.periodictablelauncher.R;
@@ -26,15 +28,37 @@ public class Core extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        ControllerItems.getInstance().init();
     }
 
     private Intent getLauncherIntent(String name) {
         return getPackageManager().getLaunchIntentForPackage(name);
     }
 
-    public ArrayList<AppDetail> getApps() {
+    public void storeData(ArrayList<AppDetail> data) {
+        ControllerStorage.storeCache(this, data);
+    }
 
+    @Nullable
+    public synchronized ArrayList<AppDetail> getApps() {
+        HashMap<String, AppDetail> result = ControllerStorage.getAppsCache(this);
+        if (result == null) return getAppsInstalled();
+        return leftJoin(getAppsInstalled(), result);
+    }
+
+    @Nullable
+    private synchronized ArrayList<AppDetail> leftJoin(ArrayList<AppDetail> left, HashMap<String, AppDetail> right) {
+        if (left == null || right == null) return left;
+
+        ArrayList<AppDetail> result = new ArrayList<>();
+        for (AppDetail itemLeft : left) {
+            String name = itemLeft.getName();
+            result.add(right.containsKey(name) ? right.get(name) : itemLeft);
+        }
+        return result;
+    }
+
+    @Nullable
+    private ArrayList<AppDetail> getAppsInstalled() {
         ArrayList<AppDetail> result = null;
 
         Intent intent = new Intent(Intent.ACTION_MAIN);

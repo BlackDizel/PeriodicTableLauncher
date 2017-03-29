@@ -3,6 +3,7 @@ package ru.byters.periodictablelauncher.ui.activities;
 import android.os.Bundle;
 
 import ru.byters.periodictablelauncher.R;
+import ru.byters.periodictablelauncher.controllers.ControllerItems;
 import ru.byters.periodictablelauncher.ui.NavigationHelper;
 import ru.byters.periodictablelauncher.ui.fragments.FragmentIcons;
 import ru.byters.periodictablelauncher.ui.fragments.FragmentItemEdit;
@@ -35,12 +36,14 @@ public class ActivityMain extends ActivityBase {
     protected void onStart() {
         super.onStart();
         NavigationHelper.getInstance().addListener(this);
+        ControllerItems.getInstance().updateData();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         NavigationHelper.getInstance().removeListener(this);
+        ControllerItems.getInstance().storeData();
     }
 
     @Override
