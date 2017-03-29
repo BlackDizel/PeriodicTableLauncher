@@ -10,7 +10,7 @@ import ru.byters.periodictablelauncher.R;
 import ru.byters.periodictablelauncher.controllers.ControllerItems;
 import ru.byters.periodictablelauncher.controllers.Core;
 import ru.byters.periodictablelauncher.models.AppDetail;
-import ru.byters.periodictablelauncher.ui.dialogs.ItemOptionsDialog;
+import ru.byters.periodictablelauncher.ui.NavigationHelper;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
 
@@ -68,7 +68,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         public boolean onLongClick(View v) {
             if (item == null) return true;
             ControllerItems.getInstance().setSelectedItem(item);
-            new ItemOptionsDialog(v.getContext()).show();
+
+            NavigationHelper.getInstance().navigateItemInfo();
+
             return true;
         }
     }
