@@ -2,11 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="?attr/selectableItemBackground"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <TextView
+        tools:text="Ab"
+
         android:id="@+id/tvTitle"
         style="@style/TextAppearance.AppCompat.Display2"
         android:layout_width="wrap_content"
@@ -23,6 +26,8 @@
         android:textColor="@color/text_color" />
 
     <TextView
+        tools:text="Acronym"
+
         android:id="@+id/tvSubtitle"
         style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="match_parent"
