@@ -5,6 +5,7 @@ import android.os.Bundle;
 import ru.byters.periodictablelauncher.R;
 import ru.byters.periodictablelauncher.ui.NavigationHelper;
 import ru.byters.periodictablelauncher.ui.fragments.FragmentIcons;
+import ru.byters.periodictablelauncher.ui.fragments.FragmentItemEdit;
 import ru.byters.periodictablelauncher.ui.fragments.FragmentItemInfo;
 
 public class ActivityMain extends ActivityBase {
@@ -48,5 +49,14 @@ public class ActivityMain extends ActivityBase {
             setFragmentItemInfo();
         else if (type == NavigationType.TYPE_ITEMS)
             setFragmentGrid();
+        else if (type == NavigationType.TYPE_ITEM_EDIT)
+            setFragmentItemEdit();
+    }
+
+    private void setFragmentItemEdit() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.flContent, FragmentItemEdit.getFragment())
+                .commit();
     }
 }

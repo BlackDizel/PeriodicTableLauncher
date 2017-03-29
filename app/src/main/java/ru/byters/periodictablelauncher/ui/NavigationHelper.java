@@ -15,4 +15,8 @@ public class NavigationHelper extends NavigationHelperBase {
     public void navigateItems() {
         norifyListeners(ListenerNavigation.NavigationType.TYPE_ITEMS);
     }
+
+    public void navigateItemEdit() {
+        norifyListeners(ListenerNavigation.NavigationType.TYPE_ITEM_EDIT);
+    }
 }
