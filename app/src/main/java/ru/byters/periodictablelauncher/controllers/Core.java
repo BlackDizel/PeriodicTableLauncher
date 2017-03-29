@@ -1,8 +1,11 @@
 package ru.byters.periodictablelauncher.controllers;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.provider.Settings;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -70,5 +73,15 @@ public class Core extends Application {
     public void startActivity(String name) {
         Intent intent = getLauncherIntent(name);
         startActivity(intent);
+    }
+
+    public void startActivityAppDetails(Context context, Uri uri) {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, uri);
+        context.startActivity(intent);
+    }
+
+    public void startActivityAppRemove(Context context, Uri uri) {
+        Intent intent = new Intent(Intent.ACTION_DELETE, uri);
+        context.startActivity(intent);
     }
 }
