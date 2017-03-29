@@ -1,9 +1,23 @@
 package ru.byters.periodictablelauncher.models;
 
 public class AppDetail implements Comparable {
+    public static final int NO_VALUE = -1;
     private String label;
     private String name;
     private String title;
+    private int color;
+
+    public AppDetail() {
+        color = NO_VALUE;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
 
     public String getTitle() {
         return title;
@@ -34,5 +48,9 @@ public class AppDetail implements Comparable {
         if (!(another instanceof AppDetail))
             return 0;
         return getLabel().compareTo(((AppDetail) another).getLabel());
+    }
+
+    public boolean isColorSetted() {
+        return color != NO_VALUE;
     }
 }
