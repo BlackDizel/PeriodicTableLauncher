@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import ru.byters.periodictablelauncher.models.AppDetail;
 
-public class ControllerItems {
+public class ControllerItems extends ControllerItemsBase{
 
     private static final String PACKAGE = "package";
     private static ControllerItems instance;
@@ -40,6 +40,7 @@ public class ControllerItems {
 
     public void updateData() {
         data = Core.getInstance().getApps();
+        notifyListeners();
     }
 
     @Nullable

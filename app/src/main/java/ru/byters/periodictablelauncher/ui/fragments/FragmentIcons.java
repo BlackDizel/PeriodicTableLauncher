@@ -17,9 +17,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import ru.byters.periodictablelauncher.R;
+import ru.byters.periodictablelauncher.controllers.ControllerItems;
+import ru.byters.periodictablelauncher.controllers.ListenerAppsUpdate;
 import ru.byters.periodictablelauncher.ui.adapters.ItemsAdapter;
 
-public class FragmentIcons extends FragmentBase {
+public class FragmentIcons extends FragmentBase implements ListenerAppsUpdate {
 
     private RecyclerView rvView;
     private ImageView imageView;
@@ -27,6 +29,25 @@ public class FragmentIcons extends FragmentBase {
 
     public static Fragment getFragment() {
         return new FragmentIcons();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ControllerItems.getInstance().addListener(this);
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ControllerItems.getInstance().removeListener(this);
+    }
+
+    @Override
+    public void onAppsUpdate() {
+        if (rvView == null) return;
+        rvView.getAdapter().notifyDataSetChanged();
     }
 
     @Override
