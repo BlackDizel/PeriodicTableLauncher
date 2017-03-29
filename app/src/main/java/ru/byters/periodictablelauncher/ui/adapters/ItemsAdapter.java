@@ -1,7 +1,6 @@
 package ru.byters.periodictablelauncher.ui.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,25 +36,23 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
         TextView tvTitle;
         TextView tvSubtitle;
-        String name;
+        AppDetail item;
 
         ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
-            name = "";
+            item = null;
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
             tvSubtitle = (TextView) itemView.findViewById(R.id.tvSubtitle);
         }
 
         public void setData(int position) {
-            AppDetail item = ControllerItems.getInstance().getItem(position);
+            item = ControllerItems.getInstance().getItem(position);
             if (item == null) {
-                name = "";
                 tvTitle.setText(R.string.item_title_error);
                 tvSubtitle.setText(R.string.item_subtitle_error);
             } else {
-                name = item.getName();
                 tvTitle.setText(item.getTitle());
                 tvSubtitle.setText(item.getLabel());
             }
@@ -63,14 +60,15 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
         @Override
         public void onClick(View v) {
-            if (TextUtils.isEmpty(name)) return;
-            Core.getInstance().startActivity(name);
+            if (item == null) return;
+            Core.getInstance().startActivity(item.getName());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            if (TextUtils.isEmpty(name)) return true;
-            new ItemOptionsDialog(v.getContext(), name).show();
+            if (item == null) return true;
+            ControllerItems.getInstance().setSelectedItem(item);
+            new ItemOptionsDialog(v.getContext()).show();
             return true;
         }
     }
