@@ -52,10 +52,22 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             if (item == null) {
                 tvTitle.setText(R.string.item_title_error);
                 tvSubtitle.setText(R.string.item_subtitle_error);
+                resetColor();
             } else {
+                if (item.isColorSetted()) {
+                    tvTitle.setTextColor(item.getColor());
+                    tvSubtitle.setTextColor(item.getColor());
+                } else
+                    resetColor();
                 tvTitle.setText(item.getTitle());
                 tvSubtitle.setText(item.getLabel());
             }
+        }
+
+
+        private void resetColor() {
+            tvTitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_color));
+            tvSubtitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_color));
         }
 
         @Override
