@@ -107,4 +107,9 @@ public class Core extends Application {
         Intent intent = new Intent(Intent.ACTION_DELETE, uri);
         context.startActivity(intent);
     }
+
+    public void startActivitySetWallpaper(Context context) {
+        Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
+        context.startActivity(Intent.createChooser(intent, getString(R.string.wallpaper_choose_dialog_title)));
+    }
 }
