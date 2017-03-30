@@ -18,10 +18,13 @@ import android.widget.ImageView;
 
 import ru.byters.periodictablelauncher.R;
 import ru.byters.periodictablelauncher.controllers.ControllerItems;
+import ru.byters.periodictablelauncher.controllers.ControllerWallpaper;
 import ru.byters.periodictablelauncher.controllers.ListenerAppsUpdate;
+import ru.byters.periodictablelauncher.controllers.ListenerWallpaperChange;
 import ru.byters.periodictablelauncher.ui.adapters.ItemsAdapter;
 
-public class FragmentIcons extends FragmentBase implements ListenerAppsUpdate {
+public class FragmentIcons extends FragmentBase
+        implements ListenerAppsUpdate, ListenerWallpaperChange {
 
     private RecyclerView rvView;
     private ImageView imageView;
@@ -35,13 +38,15 @@ public class FragmentIcons extends FragmentBase implements ListenerAppsUpdate {
     public void onStart() {
         super.onStart();
         ControllerItems.getInstance().addListener(this);
-
+        ControllerWallpaper.getInstance().addListener(this);
+        setBackground(getView());
     }
 
     @Override
     public void onStop() {
         super.onStop();
         ControllerItems.getInstance().removeListener(this);
+        ControllerWallpaper.getInstance().removeListener(this);
     }
 
     @Override
@@ -60,7 +65,6 @@ public class FragmentIcons extends FragmentBase implements ListenerAppsUpdate {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_icons, container, false);
-        setBackground(v);
         setGrid(v);
         return v;
     }
@@ -78,6 +82,7 @@ public class FragmentIcons extends FragmentBase implements ListenerAppsUpdate {
         Drawable wallpaperDrawable = WallpaperManager.getInstance(getContext()).getDrawable();
         if (wallpaperDrawable == null) return;
         imageView.setImageDrawable(wallpaperDrawable);
+        updateWallpaperPosition(new Matrix());
     }
 
     @Override
@@ -88,6 +93,30 @@ public class FragmentIcons extends FragmentBase implements ListenerAppsUpdate {
 
     private void setLayoutManager() {
         rvView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.columns), GridLayoutManager.HORIZONTAL, false));
+    }
+
+    @Override
+    public void onWallpaperChange() {
+        if (getView() == null) return;
+        setBackground(getView());
+    }
+
+    private void updateWallpaperPosition(Matrix m) {
+        if (imageView.getDrawable() == null) return;
+        m.reset();
+
+        float scale = imageView.getHeight() / (float) imageView.getDrawable().getIntrinsicHeight();
+        m.postScale(scale, scale);
+
+        int imageContainerWidth = imageView.getWidth();
+        int imageWidth = (int) (imageView.getDrawable().getIntrinsicWidth() * scale);
+        if (imageWidth > imageContainerWidth) {
+            float ratio = rvView.computeHorizontalScrollOffset() / (float) rvView.computeHorizontalScrollRange();
+            int pos = -(int) ((imageWidth - imageView.getWidth()) * ratio);
+            m.postTranslate(pos, 0);
+        }
+
+        imageView.setImageMatrix(m);
     }
 
     private class AppItemDecoration extends RecyclerView.ItemDecoration {
@@ -112,6 +141,13 @@ public class FragmentIcons extends FragmentBase implements ListenerAppsUpdate {
     }
 
     private class RecyclerViewScrollListener extends RecyclerView.OnScrollListener {
+
+        private final Matrix m;
+
+        RecyclerViewScrollListener() {
+            m = new Matrix();
+        }
+
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
@@ -121,16 +157,7 @@ public class FragmentIcons extends FragmentBase implements ListenerAppsUpdate {
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
 
-            int imageContainerWidth = imageView.getWidth();
-            int imageWidth = imageView.getDrawable().getIntrinsicWidth();
-            if (imageWidth > imageContainerWidth) {
-                float ratio = rvView.computeHorizontalScrollOffset() / (float) rvView.computeHorizontalScrollRange();
-                int pos = -(int) ((imageWidth - imageView.getWidth()) * ratio);
-                Matrix m = new Matrix();
-                m.reset();
-                m.postTranslate(pos, 0);
-                imageView.setImageMatrix(m);
-            }
+            updateWallpaperPosition(m);
         }
     }
 }

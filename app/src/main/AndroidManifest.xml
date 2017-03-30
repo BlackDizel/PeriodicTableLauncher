@@ -33,6 +33,14 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".controllers.WallpaperChangedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.WALLPAPER_CHANGED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
