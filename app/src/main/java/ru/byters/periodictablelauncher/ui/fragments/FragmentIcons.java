@@ -1,10 +1,8 @@
 package ru.byters.periodictablelauncher.ui.fragments;
 
 import android.app.WallpaperManager;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Matrix;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,6 +20,7 @@ import ru.byters.periodictablelauncher.controllers.ControllerWallpaper;
 import ru.byters.periodictablelauncher.controllers.ListenerAppsUpdate;
 import ru.byters.periodictablelauncher.controllers.ListenerWallpaperChange;
 import ru.byters.periodictablelauncher.ui.adapters.ItemsAdapter;
+import ru.byters.periodictablelauncher.ui.utils.AppItemDecoration;
 
 public class FragmentIcons extends FragmentBase
         implements ListenerAppsUpdate, ListenerWallpaperChange {
@@ -119,38 +118,12 @@ public class FragmentIcons extends FragmentBase
         imageView.setImageMatrix(m);
     }
 
-    private class AppItemDecoration extends RecyclerView.ItemDecoration {
-        int margin;
-
-        AppItemDecoration(Context context) {
-            margin = (int) context.getResources().getDimension(R.dimen.item_margin);
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            super.getItemOffsets(outRect, view, parent, state);
-
-            //parent.getChildLayoutPosition(view);
-
-            outRect.top = margin;
-            outRect.left = margin;
-            outRect.right = margin;
-            outRect.bottom = margin;
-
-        }
-    }
-
     private class RecyclerViewScrollListener extends RecyclerView.OnScrollListener {
 
         private final Matrix m;
 
         RecyclerViewScrollListener() {
             m = new Matrix();
-        }
-
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-            super.onScrollStateChanged(recyclerView, newState);
         }
 
         @Override
