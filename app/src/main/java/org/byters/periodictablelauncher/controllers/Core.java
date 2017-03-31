@@ -1,6 +1,7 @@
 package org.byters.periodictablelauncher.controllers;
 
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -38,8 +39,11 @@ public class Core extends Application {
         ControllerPreference.getInstance().init();
     }
 
-    private Intent getLauncherIntent(String name) {
-        return getPackageManager().getLaunchIntentForPackage(name);
+    private Intent getLauncherIntent(String packageName, String name) {
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName(packageName, name));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
     }
 
     public void storeData(ArrayList<AppDetail> data) {
@@ -74,7 +78,8 @@ public class Core extends Application {
         List<ResolveInfo> availableActivities = getPackageManager().queryIntentActivities(intent, 0);
         for (ResolveInfo ri : availableActivities) {
             AppDetail app = new AppDetail();
-            app.setName(ri.activityInfo.packageName);
+            app.setPackageName(ri.activityInfo.packageName);
+            app.setName(ri.activityInfo.name);
 
             long time = System.currentTimeMillis();
             try {
@@ -107,8 +112,8 @@ public class Core extends Application {
         return buffer;
     }
 
-    public void startActivity(String name) {
-        Intent intent = getLauncherIntent(name);
+    public void startActivity(String packageName, String name) {
+        Intent intent = getLauncherIntent(packageName, name);
         startActivity(intent);
     }
 

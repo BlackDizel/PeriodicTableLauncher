@@ -100,7 +100,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
         @Override
         public void onClick(View v) {
             if (item == null) return;
-            Core.getInstance().startActivity(item.getName());
+            Core.getInstance().startActivity(item.getPackageName(), item.getName());
         }
 
         @Override
