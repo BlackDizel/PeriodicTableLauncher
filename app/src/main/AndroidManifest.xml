@@ -24,6 +24,18 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="org.byters.periodictablelauncher.ui.activities.ActivitySettings"
+            android:label="settings"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <receiver android:name="org.byters.periodictablelauncher.controllers.AppInstallReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />

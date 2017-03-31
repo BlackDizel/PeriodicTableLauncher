@@ -7,5 +7,39 @@
     <string name="item_options_info">INFO</string>
     <string name="item_options_remove">REMOVE</string>
     <string name="item_options_edit">EDIT</string>
+    <string name="setings_select_background">Select background</string>
+    <string name="settings_search_panel">Search panel</string>
+    <string name="settings_icons_settings">Icons settings</string>
+    <string name="settings_default_text_color">Default text color</string>
+    <string name="settings_shadow">Shadow</string>
+    <string name="settings_grid_settings">Grid settings</string>
+    <string name="settings_grid_size">Grid size</string>
+    <string name="settings_scroll_orientation">Scroll orientation</string>
+    <string name="settings_scroll_horizontal">horizontal</string>
+    <string name="settings_scroll_vertical">vertical</string>
+    <string name="settings_sorting_method">Sorting method</string>
+    <string name="settings_scroll_full_title">Full title</string>
+    <string name="settings_scroll_label">Label</string>
+    <string name="settings_scroll_date">Date</string>
+    <string name="settings_sorting_orientation">Sorting orientation</string>
+    <string name="settings_sort_ascending">Ascending</string>
+    <string name="settings_sort_descending">Descending</string>
+    <string name="settings_maintenance">Maintenance</string>
+    <string name="settings_reset_icons_labels">reset icons labels</string>
+    <string name="settings_reset_icons_color">reset icons color</string>
+    <string name="settings_reset_cache">reset cache</string>
+    <string name="settings_version" formatted="false">version %s1 (%s2)</string>
+    <string name="wallpaper_choose_dialog_title">Select Wallpaper</string>
+    <string name="settings_feedback">Feedback</string>
+    <string name="settings_support">Support</string>
+    <string name="play_market_address_format">https://play.google.com/store/apps/details?id=%s</string>
+    <string name="browser_error">Браузер не найден</string>
+    <string name="email_app_error_no_found">email app not found</string>
+    <string name="feedback_message_title">periodic table launcher support request</string>
+    <string name="feedback_message_body">hi</string>
+    <string name="request_buy_email">mailto:blackdizel@gmail.com</string>
+    <string name="message_cache_removed">Cache removed</string>
+    <string name="message_color_reset">custom app icons color resetted</string>
+    <string name="message_labels_reset">custom app icons labels resetted</string>
 
 </resources>

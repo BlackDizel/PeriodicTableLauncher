@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:text="version 1.0" />
+
+            <TextView
+                android:id="@+id/tvBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="@string/setings_select_background"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/settings_icons_settings" />
+
+            <LinearLayout
+                android:id="@+id/llTextColorDefault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:text="@string/settings_default_text_color"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                <com.jrummyapps.android.colorpicker.ColorPanelView
+                    android:id="@+id/cpTextColorDefault"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:padding="12dp" />
+
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/sShadow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:text="@string/settings_shadow"
+                android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                android:textOff="Disable"
+                android:textOn="Enable" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/settings_grid_settings" />
+
+            <RadioGroup
+                android:id="@+id/rgScrollOrientation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_scroll_orientation"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                <RadioButton
+                    android:id="@+id/rbHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_scroll_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                <RadioButton
+                    android:id="@+id/rbVertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_scroll_vertical"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/rgSortMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_sorting_method"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                <RadioButton
+                    android:id="@+id/rbSortFullTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_scroll_full_title"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                <RadioButton
+                    android:id="@+id/rbSortLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_scroll_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                <RadioButton
+                    android:id="@+id/rbSortDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_scroll_date"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/rgSortOrientation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_sorting_orientation"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                <RadioButton
+                    android:id="@+id/rbSortOrientAsc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_sort_ascending"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+                <RadioButton
+                    android:id="@+id/rbSortOrientDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_sort_descending"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/settings_maintenance" />
+
+            <TextView
+                android:id="@+id/tvResetIconsLabels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="@string/settings_reset_icons_labels"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button" />
+
+            <TextView
+                android:id="@+id/tvResetIconsColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="@string/settings_reset_icons_color"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button" />
+
+            <TextView
+                android:id="@+id/tvResetCache"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="@string/settings_reset_cache"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button" />
+
+            <TextView
+                android:id="@+id/tvFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="@string/settings_feedback"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button" />
+
+            <TextView
+                android:id="@+id/tvSupport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="@string/settings_support"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button" />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>
