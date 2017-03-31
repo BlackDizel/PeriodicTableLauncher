@@ -9,6 +9,7 @@ public class ModelPreference implements Serializable {
 
     public ModelPreference() {
         colorAppIcon = NO_VALUE;
+        shadowVisible = true;
     }
 
     public int getColorAppIcon() {
