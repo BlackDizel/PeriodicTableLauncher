@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import org.byters.periodictablelauncher.R;
 import org.byters.periodictablelauncher.controllers.ControllerItems;
+import org.byters.periodictablelauncher.controllers.ControllerPreference;
 import org.byters.periodictablelauncher.models.AppDetail;
 
 public class FragmentItemInfoBase extends FragmentBase {
@@ -28,16 +29,40 @@ public class FragmentItemInfoBase extends FragmentBase {
         etTitle = (TextView) v.findViewById(R.id.etTitle);
         tvLabel = (TextView) v.findViewById(R.id.tvLabel);
 
+        setText();
+        setTextColor();
+        setShadow();
+    }
+
+    private void setText() {
         setText(etTitle, ControllerItems.getInstance().getSelectedItemTitle());
         setText(tvLabel, ControllerItems.getInstance().getSelectedItemLabel());
-        setTextColor();
+    }
+
+    private void setShadow() {
+        setShadow(etTitle);
+        setShadow(tvLabel);
     }
 
     protected void setTextColor() {
+        setTextColor(etTitle);
+        setTextColor(tvLabel);
+    }
+
+    private void setShadow(TextView view) {
+        view.setShadowLayer(ControllerPreference.getInstance().isShadowVisible()
+                        ? getContext().getResources().getInteger(R.integer.text_shadow_radius)
+                        : 0,
+                getContext().getResources().getInteger(R.integer.text_shadow_dx),
+                getContext().getResources().getInteger(R.integer.text_shadow_dy),
+                getContext().getResources().getColor(R.color.text_shadow));
+    }
+
+    private void setTextColor(TextView view) {
         int color = ControllerItems.getInstance().getSelectedItemColor();
-        if (color == AppDetail.NO_VALUE) return;
-        etTitle.setTextColor(color);
-        tvLabel.setTextColor(color);
+        if (color == AppDetail.NO_VALUE)
+            color = ControllerPreference.getInstance().getColorIconDefault();
+        view.setTextColor(color);
     }
 
 }
