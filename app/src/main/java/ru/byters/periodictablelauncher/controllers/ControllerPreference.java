@@ -1,6 +1,6 @@
 package ru.byters.periodictablelauncher.controllers;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
 import ru.byters.periodictablelauncher.R;
 import ru.byters.periodictablelauncher.models.ModelPreference;
@@ -8,7 +8,7 @@ import ru.byters.periodictablelauncher.models.ModelPreference;
 public class ControllerPreference {
 
     private static ControllerPreference instance;
-    @Nullable
+    @NonNull
     private ModelPreference model;
 
     private ControllerPreference() {
@@ -21,6 +21,7 @@ public class ControllerPreference {
 
     void init() {
         model = Core.getInstance().readPreferenceCache();
+        if (model == null) model = new ModelPreference();
     }
 
     public void storeData() {
@@ -28,7 +29,7 @@ public class ControllerPreference {
     }
 
     private boolean isColorIconDefaultSetted() {
-        return model != null && model.getColorAppIcon() != ModelPreference.NO_VALUE;
+        return model.getColorAppIcon() != ModelPreference.NO_VALUE;
     }
 
     public int getColorIconDefault() {
@@ -38,43 +39,38 @@ public class ControllerPreference {
     }
 
     public void setColorIconDefault(int color) {
-        if (model == null) model = new ModelPreference();
         model.setColorAppIcon(color);
     }
 
     public void setAppShadowVisibility(boolean visibility) {
-        if (model == null) model = new ModelPreference();
         model.setShadowVisible(visibility);
     }
 
     public boolean isShadowVisible() {
-        return model != null && model.isShadowVisible();
+        return model.isShadowVisible();
     }
 
     public int getAppListOrientation() {
-        return model == null ? ModelPreference.NO_VALUE : model.getAppListOrientation();
+        return model.getAppListOrientation();
     }
 
     public void setAppListOrientation(int orientation) {
-        if (model == null) model = new ModelPreference();
         model.setAppListOrientation(orientation);
     }
 
     public int getSortMethod() {
-        return model == null ? ModelPreference.NO_VALUE : model.getSortMethod();
+        return model.getSortMethod();
     }
 
     public void setSortMethod(int sortMethod) {
-        if (model == null) model = new ModelPreference();
         model.setSortMethod(sortMethod);
     }
 
     public int getSortOrientation() {
-        return model == null ? ModelPreference.NO_VALUE : model.getSortOrientation();
+        return model.getSortOrientation();
     }
 
     public void setSortOrientation(int sortOrientation) {
-        if (model == null) model = new ModelPreference();
         model.setSortOrientation(sortOrientation);
     }
 }
