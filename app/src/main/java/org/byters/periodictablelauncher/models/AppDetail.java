@@ -2,9 +2,10 @@ package org.byters.periodictablelauncher.models;
 
 import android.support.annotation.NonNull;
 
-import java.io.Serializable;
-
 import org.byters.periodictablelauncher.controllers.ControllerPreference;
+import org.byters.periodictablelauncher.controllers.Core;
+
+import java.io.Serializable;
 
 public class AppDetail implements Comparable, Serializable {
     public static final int NO_VALUE = -1;
@@ -16,7 +17,7 @@ public class AppDetail implements Comparable, Serializable {
     private long date;
 
     public AppDetail() {
-        color = NO_VALUE;
+        resetColor();
     }
 
     public int getColor() {
@@ -80,5 +81,13 @@ public class AppDetail implements Comparable, Serializable {
 
     public void setDate(long date) {
         this.date = date;
+    }
+
+    public void resetColor() {
+        color = NO_VALUE;
+    }
+
+    public void resetCustomLabel() {
+        setTitle(Core.getInstance().getTitle(getLabel()));
     }
 }
