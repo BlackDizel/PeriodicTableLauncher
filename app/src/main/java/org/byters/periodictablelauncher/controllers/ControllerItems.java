@@ -3,9 +3,9 @@ package org.byters.periodictablelauncher.controllers;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
-import java.util.ArrayList;
-
 import org.byters.periodictablelauncher.models.AppDetail;
+
+import java.util.ArrayList;
 
 public class ControllerItems extends ControllerItemsBase {
 
@@ -84,6 +84,28 @@ public class ControllerItems extends ControllerItemsBase {
 
     public void setData(@Nullable ArrayList<AppDetail> result) {
         this.data = result;
+        notifyListeners();
+    }
+
+    public void removeCache() {
+        data = null;
+        storeData();
+        notifyListeners();
+    }
+
+    public void resetAppIconsCustomColor() {
+        if (data == null) return;
+        for (AppDetail item : data)
+            item.resetColor();
+        storeData();
+        notifyListeners();
+    }
+
+    public void resetAppIconsCustomLabels() {
+        if (data == null) return;
+        for (AppDetail item : data)
+            item.resetCustomLabel();
+        storeData();
         notifyListeners();
     }
 }
