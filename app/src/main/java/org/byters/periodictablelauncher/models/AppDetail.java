@@ -15,6 +15,7 @@ public class AppDetail implements Comparable, Serializable {
     private String title;
     private int color;
     private long date;
+    private String packageName;
 
     public AppDetail() {
         resetColor();
@@ -89,5 +90,13 @@ public class AppDetail implements Comparable, Serializable {
 
     public void resetCustomLabel() {
         setTitle(Core.getInstance().getTitle(getLabel()));
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 }
