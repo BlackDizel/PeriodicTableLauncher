@@ -13,7 +13,6 @@
         <activity
             android:name="org.byters.periodictablelauncher.ui.activities.ActivityMain"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +26,6 @@
         <activity
             android:name="org.byters.periodictablelauncher.ui.activities.ActivitySettings"
             android:label="settings"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
