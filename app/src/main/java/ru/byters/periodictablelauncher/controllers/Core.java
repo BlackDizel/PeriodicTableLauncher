@@ -3,6 +3,7 @@ package ru.byters.periodictablelauncher.controllers;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.Settings;
@@ -55,7 +56,6 @@ public class Core extends Application {
         for (AppDetail itemLeft : left) {
             String name = itemLeft.getName();
             AppDetail item = right.containsKey(name) ? right.get(name) : itemLeft;
-            if (!result.contains(item)) result.add(item);
         }
         return result;
     }
@@ -71,6 +71,14 @@ public class Core extends Application {
         for (ResolveInfo ri : availableActivities) {
             AppDetail app = new AppDetail();
             app.setName(ri.activityInfo.packageName);
+
+            long time = System.currentTimeMillis();
+            try {
+                time = getPackageManager().getPackageInfo(ri.activityInfo.packageName, PackageManager.GET_CONFIGURATIONS).firstInstallTime;
+            } catch (PackageManager.NameNotFoundException e) {
+            }
+
+            app.setDate(time);
             app.setLabel(ri.loadLabel(getPackageManager()).toString());
             app.setTitle(getTitle(app.getLabel()));
             if (result == null) result = new ArrayList<>();
