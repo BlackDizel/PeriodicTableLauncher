@@ -15,7 +15,6 @@ import com.jrummyapps.android.colorpicker.ColorPickerView;
 import org.byters.periodictablelauncher.R;
 import org.byters.periodictablelauncher.controllers.ControllerItems;
 import org.byters.periodictablelauncher.models.AppDetail;
-import org.byters.periodictablelauncher.ui.NavigationHelper;
 
 public class FragmentItemEdit extends FragmentItemInfoBase
         implements View.OnClickListener, TextWatcher, ColorPickerView.OnColorChangedListener {
@@ -41,8 +40,7 @@ public class FragmentItemEdit extends FragmentItemInfoBase
 
     @Override
     public void onClick(View v) {
-        if (!ControllerItems.getInstance().isSelectedItemExist()) return;
-        NavigationHelper.getInstance().navigateItemInfo();
+        getActivity().onBackPressed();
     }
 
     @Override

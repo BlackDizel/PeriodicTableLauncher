@@ -1,6 +1,7 @@
 package org.byters.periodictablelauncher.ui.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 
 import org.byters.periodictablelauncher.R;
 import org.byters.periodictablelauncher.controllers.ControllerItems;
@@ -29,6 +30,8 @@ public class ActivityMain extends ActivityBase {
     private void setFragmentItemInfo() {
         getSupportFragmentManager()
                 .beginTransaction()
+                .addToBackStack(null)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.flContent, FragmentItemInfo.getFragment())
                 .commit();
     }
@@ -61,6 +64,8 @@ public class ActivityMain extends ActivityBase {
     private void setFragmentItemEdit() {
         getSupportFragmentManager()
                 .beginTransaction()
+                .addToBackStack(null)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.flContent, FragmentItemEdit.getFragment())
                 .commit();
     }

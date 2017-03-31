@@ -52,7 +52,7 @@ public class FragmentItemInfo extends FragmentItemInfoBase
                 NavigationHelper.getInstance().navigateItemEdit();
                 break;
             case R.id.ivBack:
-                NavigationHelper.getInstance().navigateItems();
+                getActivity().onBackPressed();
                 break;
         }
     }
