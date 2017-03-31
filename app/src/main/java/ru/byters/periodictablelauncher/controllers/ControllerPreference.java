@@ -27,7 +27,7 @@ public class ControllerPreference {
         Core.getInstance().storePreferenceCache(model);
     }
 
-    public boolean isColorIconDefaultSetted() {
+    private boolean isColorIconDefaultSetted() {
         return model != null && model.getColorAppIcon() != ModelPreference.NO_VALUE;
     }
 
@@ -49,5 +49,32 @@ public class ControllerPreference {
 
     public boolean isShadowVisible() {
         return model != null && model.isShadowVisible();
+    }
+
+    public int getAppListOrientation() {
+        return model == null ? ModelPreference.NO_VALUE : model.getAppListOrientation();
+    }
+
+    public void setAppListOrientation(int orientation) {
+        if (model == null) model = new ModelPreference();
+        model.setAppListOrientation(orientation);
+    }
+
+    public int getSortMethod() {
+        return model == null ? ModelPreference.NO_VALUE : model.getSortMethod();
+    }
+
+    public void setSortMethod(int sortMethod) {
+        if (model == null) model = new ModelPreference();
+        model.setSortMethod(sortMethod);
+    }
+
+    public int getSortOrientation() {
+        return model == null ? ModelPreference.NO_VALUE : model.getSortOrientation();
+    }
+
+    public void setSortOrientation(int sortOrientation) {
+        if (model == null) model = new ModelPreference();
+        model.setSortOrientation(sortOrientation);
     }
 }
