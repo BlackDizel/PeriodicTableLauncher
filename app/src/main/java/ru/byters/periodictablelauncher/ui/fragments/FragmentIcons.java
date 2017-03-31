@@ -16,9 +16,11 @@ import android.widget.ImageView;
 
 import ru.byters.periodictablelauncher.R;
 import ru.byters.periodictablelauncher.controllers.ControllerItems;
+import ru.byters.periodictablelauncher.controllers.ControllerPreference;
 import ru.byters.periodictablelauncher.controllers.ControllerWallpaper;
 import ru.byters.periodictablelauncher.controllers.ListenerAppsUpdate;
 import ru.byters.periodictablelauncher.controllers.ListenerWallpaperChange;
+import ru.byters.periodictablelauncher.models.ModelPreference;
 import ru.byters.periodictablelauncher.ui.adapters.ItemsAdapter;
 import ru.byters.periodictablelauncher.ui.utils.AppItemDecoration;
 
@@ -91,7 +93,14 @@ public class FragmentIcons extends FragmentBase
     }
 
     private void setLayoutManager() {
-        rvView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.columns), GridLayoutManager.HORIZONTAL, false));
+        int orientation = ControllerPreference.getInstance().getAppListOrientation() == ModelPreference.ORIENTATION_HORIZONTAL
+                ? GridLayoutManager.HORIZONTAL
+                : GridLayoutManager.VERTICAL;
+
+        rvView.setLayoutManager(new GridLayoutManager(getContext()
+                , getResources().getInteger(R.integer.columns)
+                , orientation
+                , false));
     }
 
     @Override
