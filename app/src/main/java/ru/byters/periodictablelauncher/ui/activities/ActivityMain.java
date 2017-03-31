@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import ru.byters.periodictablelauncher.R;
 import ru.byters.periodictablelauncher.controllers.ControllerItems;
+import ru.byters.periodictablelauncher.controllers.ControllerPreference;
 import ru.byters.periodictablelauncher.ui.NavigationHelper;
 import ru.byters.periodictablelauncher.ui.fragments.FragmentIcons;
 import ru.byters.periodictablelauncher.ui.fragments.FragmentItemEdit;
@@ -44,6 +45,7 @@ public class ActivityMain extends ActivityBase {
         super.onStop();
         NavigationHelper.getInstance().removeListener(this);
         ControllerItems.getInstance().storeData();
+        ControllerPreference.getInstance().storeData();
     }
 
     @Override

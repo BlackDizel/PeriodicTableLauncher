@@ -15,6 +15,7 @@ import java.util.List;
 
 import ru.byters.periodictablelauncher.R;
 import ru.byters.periodictablelauncher.models.AppDetail;
+import ru.byters.periodictablelauncher.models.ModelPreference;
 
 public class Core extends Application {
 
@@ -28,6 +29,7 @@ public class Core extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        ControllerPreference.getInstance().init();
     }
 
     private Intent getLauncherIntent(String name) {
@@ -111,5 +113,14 @@ public class Core extends Application {
     public void startActivitySetWallpaper(Context context) {
         Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
         context.startActivity(Intent.createChooser(intent, getString(R.string.wallpaper_choose_dialog_title)));
+    }
+
+    @Nullable
+    ModelPreference readPreferenceCache() {
+        return ControllerStorage.readPreferenceCache(this);
+    }
+
+    void storePreferenceCache(ModelPreference model) {
+        ControllerStorage.storePreferenceCache(this, model);
     }
 }

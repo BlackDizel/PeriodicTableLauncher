@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import ru.byters.periodictablelauncher.R;
 import ru.byters.periodictablelauncher.controllers.ControllerItems;
+import ru.byters.periodictablelauncher.controllers.ControllerPreference;
 import ru.byters.periodictablelauncher.controllers.Core;
 import ru.byters.periodictablelauncher.models.AppDetail;
 import ru.byters.periodictablelauncher.ui.NavigationHelper;
@@ -66,8 +67,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
 
         private void resetColor() {
-            tvTitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_color));
-            tvSubtitle.setTextColor(itemView.getContext().getResources().getColor(R.color.text_color));
+            int color = ControllerPreference.getInstance().getColorIconDefault();
+            tvTitle.setTextColor(color);
+            tvSubtitle.setTextColor(color);
         }
 
         @Override
