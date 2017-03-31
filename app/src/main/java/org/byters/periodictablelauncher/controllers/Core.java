@@ -8,16 +8,20 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
+import android.widget.Toast;
+
+import org.byters.periodictablelauncher.BuildConfig;
+import org.byters.periodictablelauncher.R;
+import org.byters.periodictablelauncher.models.AppDetail;
+import org.byters.periodictablelauncher.models.ModelPreference;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import org.byters.periodictablelauncher.R;
-import org.byters.periodictablelauncher.models.AppDetail;
-import org.byters.periodictablelauncher.models.ModelPreference;
 
 public class Core extends Application {
 
@@ -80,7 +84,7 @@ public class Core extends Application {
 
             app.setDate(time);
             app.setLabel(ri.loadLabel(getPackageManager()).toString());
-            app.setTitle(getTitle(app.getLabel()));
+            app.resetCustomLabel();
             if (result == null) result = new ArrayList<>();
             result.add(app);
         }
@@ -91,7 +95,7 @@ public class Core extends Application {
         return result;
     }
 
-    private String getTitle(String label) {
+    public String getTitle(String label) {
         String buffer = label.toLowerCase().replaceAll(getString(R.string.vowels_eng), "");
         buffer = buffer.replaceAll(" ", "");
         buffer = buffer.replaceAll(getString(R.string.vowels_rus), "");
@@ -130,6 +134,40 @@ public class Core extends Application {
 
     void storePreferenceCache(ModelPreference model) {
         ControllerStorage.storePreferenceCache(this, model);
+    }
+
+    public void openPlayMarketPage(Context context) {
+        openUrl(context, getString(R.string.browser_error), Uri.parse(String.format(getString(R.string.play_market_address_format), BuildConfig.APPLICATION_ID)));
+    }
+
+    private void openUrl(Context context, String error_message, Uri uri) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(uri);
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(intent);
+        } else {
+            Toast.makeText(context, error_message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void sendSupportRequest(Context context) {
+        Intent intentSend = getIntentSendEmail(this
+                , R.string.feedback_message_title
+                , R.string.feedback_message_body);
+
+        if (intentSend.resolveActivity(getPackageManager()) == null) {
+            Toast.makeText(context, R.string.email_app_error_no_found, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        context.startActivity(intentSend);
+    }
+
+    @NonNull
+    public Intent getIntentSendEmail(Context context, @StringRes int titleRes, @StringRes int bodyRes) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(context.getString(R.string.request_buy_email)));
+        intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(titleRes));
+        intent.putExtra(Intent.EXTRA_TEXT, context.getString(bodyRes));
+        return intent;
     }
 
     private class UpdateAppsAsync extends AsyncTask<Void, Void, ArrayList<AppDetail>> {
