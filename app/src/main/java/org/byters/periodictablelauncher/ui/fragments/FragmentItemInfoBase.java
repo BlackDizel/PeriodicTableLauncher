@@ -59,10 +59,13 @@ public class FragmentItemInfoBase extends FragmentBase {
     }
 
     private void setTextColor(TextView view) {
-        int color = ControllerItems.getInstance().getSelectedItemColor();
-        if (color == AppDetail.NO_VALUE)
-            color = ControllerPreference.getInstance().getColorIconDefault();
+        int color = getColor();
         view.setTextColor(color);
     }
 
+    protected int getColor() {
+        int color = ControllerItems.getInstance().getSelectedItemColor();
+        if (color != AppDetail.NO_VALUE) return color;
+        return ControllerPreference.getInstance().getColorIconDefault();
+    }
 }

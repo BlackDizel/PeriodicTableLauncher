@@ -34,6 +34,8 @@ public class FragmentItemEdit extends FragmentItemInfoBase
         ((EditText) v.findViewById(R.id.etTitle)).addTextChangedListener(this);
         ((ColorPickerView) v.findViewById(R.id.cpv)).setOnColorChangedListener(this);
 
+        ((ColorPickerView) v.findViewById(R.id.cpv)).setColor(getColor());
+
         return v;
     }
 
@@ -56,7 +58,7 @@ public class FragmentItemEdit extends FragmentItemInfoBase
     @Override
     public void afterTextChanged(Editable s) {
         if (s.length() == 0) return;
-        ControllerItems.getInstance().setSelectedItemTitle(s.subSequence(0, Math.min(AppDetail.MAX_ITEM_TITLE_LENGTH,s.length())).toString());
+        ControllerItems.getInstance().setSelectedItemTitle(s.subSequence(0, Math.min(AppDetail.MAX_ITEM_TITLE_LENGTH, s.length())).toString());
     }
 
     @Override
