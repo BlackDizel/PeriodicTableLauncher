@@ -22,7 +22,6 @@ import ru.byters.periodictablelauncher.controllers.ListenerAppsUpdate;
 import ru.byters.periodictablelauncher.controllers.ListenerWallpaperChange;
 import ru.byters.periodictablelauncher.models.ModelPreference;
 import ru.byters.periodictablelauncher.ui.adapters.ItemsAdapter;
-import ru.byters.periodictablelauncher.ui.utils.AppItemDecoration;
 
 public class FragmentIcons extends FragmentBase
         implements ListenerAppsUpdate, ListenerWallpaperChange {
@@ -73,7 +72,6 @@ public class FragmentIcons extends FragmentBase
     private void setGrid(View v) {
         rvView = (RecyclerView) v.findViewById(R.id.rvItems);
         rvView.setAdapter(new ItemsAdapter());
-        rvView.addItemDecoration(new AppItemDecoration(getContext()));
         setLayoutManager();
         rvView.addOnScrollListener(scrollListener);
     }
