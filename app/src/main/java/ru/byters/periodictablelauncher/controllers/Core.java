@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 
@@ -42,10 +43,8 @@ public class Core extends Application {
     }
 
     @Nullable
-    public synchronized ArrayList<AppDetail> getApps() {
-        HashMap<String, AppDetail> result = ControllerStorage.getAppsCache(this);
-        if (result == null) return getAppsInstalled();
-        return leftJoin(getAppsInstalled(), result);
+    public void updateApps() {
+        new UpdateAppsAsync().execute();
     }
 
     @Nullable
@@ -56,6 +55,7 @@ public class Core extends Application {
         for (AppDetail itemLeft : left) {
             String name = itemLeft.getName();
             AppDetail item = right.containsKey(name) ? right.get(name) : itemLeft;
+            result.add(item);
         }
         return result;
     }
@@ -130,5 +130,22 @@ public class Core extends Application {
 
     void storePreferenceCache(ModelPreference model) {
         ControllerStorage.storePreferenceCache(this, model);
+    }
+
+    private class UpdateAppsAsync extends AsyncTask<Void, Void, ArrayList<AppDetail>> {
+
+        @Override
+        protected ArrayList<AppDetail> doInBackground(Void... params) {
+            if (Core.getInstance() == null) return null;
+            HashMap<String, AppDetail> result = ControllerStorage.getAppsCache(Core.getInstance());
+            if (result == null) return getAppsInstalled();
+            return leftJoin(getAppsInstalled(), result);
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<AppDetail> result) {
+            super.onPostExecute(result);
+            ControllerItems.getInstance().setData(result);
+        }
     }
 }
