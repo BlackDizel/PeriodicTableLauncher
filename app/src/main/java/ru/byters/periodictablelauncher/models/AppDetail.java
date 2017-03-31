@@ -1,6 +1,10 @@
 package ru.byters.periodictablelauncher.models;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
+
+import ru.byters.periodictablelauncher.controllers.ControllerPreference;
 
 public class AppDetail implements Comparable, Serializable {
     public static final int NO_VALUE = -1;
@@ -9,6 +13,7 @@ public class AppDetail implements Comparable, Serializable {
     private String name;
     private String title;
     private int color;
+    private long date;
 
     public AppDetail() {
         color = NO_VALUE;
@@ -47,13 +52,33 @@ public class AppDetail implements Comparable, Serializable {
     }
 
     @Override
-    public int compareTo(Object another) {
+    public int compareTo(@NonNull Object another) {
         if (!(another instanceof AppDetail))
             return 0;
-        return getLabel().compareTo(((AppDetail) another).getLabel());
+
+        AppDetail other = (AppDetail) another;
+        int sortOrientationFactor = ControllerPreference.getInstance().getSortOrientation() == ModelPreference.SORT_ORIENT_ASC ? 1 : -1;
+        int compareResult = ControllerPreference.getInstance().getSortMethod() == ModelPreference.SORT_FULLTITLE
+                ? getLabel().compareTo(other.getLabel())
+                : ControllerPreference.getInstance().getSortMethod() == ModelPreference.SORT_LABEL
+                ? getTitle().compareTo(other.getTitle())
+                : compareDate(other.date);
+        return sortOrientationFactor * compareResult;
+    }
+
+    private int compareDate(long dateOther) {
+        return date == dateOther
+                ? 0
+                : date < dateOther
+                ? -1
+                : 1;
     }
 
     public boolean isColorSetted() {
         return color != NO_VALUE;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 }
