@@ -15,10 +15,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ru.byters.periodictablelauncher.models.AppDetail;
+import ru.byters.periodictablelauncher.models.ModelPreference;
 
 class ControllerStorage {
     private static final String FILE_CACHE = "cache";
     private static final String TAG = "storage";
+    private static final String CACHE_PREFERENCES = "preferences";
 
     static HashMap<String, AppDetail> getAppsCache(Context context) {
         return (HashMap<String, AppDetail>) readObjectFromFile(context, FILE_CACHE);
@@ -101,5 +103,13 @@ class ControllerStorage {
         } catch (Exception e) {
             Log.e(TAG, Log.getStackTraceString(e));
         }
+    }
+
+    static ModelPreference readPreferenceCache(Context context) {
+        return (ModelPreference) readObjectFromFile(context, CACHE_PREFERENCES);
+    }
+
+    static void storePreferenceCache(Context context, ModelPreference model) {
+        writeObjectToFile(context, model, CACHE_PREFERENCES);
     }
 }
