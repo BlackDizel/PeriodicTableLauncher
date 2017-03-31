@@ -50,19 +50,44 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
         public void setData(int position) {
             item = ControllerItems.getInstance().getItem(position);
+            setShadow();
+            setColor();
+            setText();
+        }
+
+        private void setText() {
             if (item == null) {
                 tvTitle.setText(R.string.item_title_error);
                 tvSubtitle.setText(R.string.item_subtitle_error);
-                resetColor();
             } else {
-                if (item.isColorSetted()) {
-                    tvTitle.setTextColor(item.getColor());
-                    tvSubtitle.setTextColor(item.getColor());
-                } else
-                    resetColor();
                 tvTitle.setText(item.getTitle());
                 tvSubtitle.setText(item.getLabel());
             }
+        }
+
+        private void setColor() {
+            if (item == null || !item.isColorSetted())
+                resetColor();
+            else {
+                tvTitle.setTextColor(item.getColor());
+                tvSubtitle.setTextColor(item.getColor());
+            }
+        }
+
+        private void setShadow() {
+            tvTitle.setShadowLayer(ControllerPreference.getInstance().isShadowVisible()
+                            ? itemView.getContext().getResources().getInteger(R.integer.text_shadow_radius)
+                            : 0,
+                    itemView.getContext().getResources().getInteger(R.integer.text_shadow_dx),
+                    itemView.getContext().getResources().getInteger(R.integer.text_shadow_dy),
+                    itemView.getContext().getResources().getColor(R.color.text_shadow));
+
+            tvSubtitle.setShadowLayer(ControllerPreference.getInstance().isShadowVisible()
+                            ? itemView.getContext().getResources().getInteger(R.integer.text_shadow_radius)
+                            : 0,
+                    itemView.getContext().getResources().getInteger(R.integer.text_shadow_dx),
+                    itemView.getContext().getResources().getInteger(R.integer.text_shadow_dy),
+                    itemView.getContext().getResources().getColor(R.color.text_shadow));
         }
 
 

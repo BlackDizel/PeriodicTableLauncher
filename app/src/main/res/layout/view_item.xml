@@ -1,45 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="?attr/selectableItemBackground"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <TextView
-        tools:text="Ab"
-
         android:id="@+id/tvTitle"
-        style="@style/TextAppearance.AppCompat.Display2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="none"
         android:lines="1"
         android:paddingEnd="@dimen/item_title_padding_horizontal"
         android:paddingStart="@dimen/item_title_padding_horizontal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
 
-        android:shadowColor="@color/text_shadow"
-        android:shadowDx="@integer/text_shadow_dx"
-        android:shadowDy="@integer/text_shadow_dy"
-        android:shadowRadius="@integer/text_shadow_radius"
-        android:textColor="@color/text_color" />
+        tools:text="Ab" />
 
     <TextView
-        tools:text="Acronym"
-
         android:id="@+id/tvSubtitle"
-        style="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:lines="@integer/subtitle_lines"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
 
-        android:shadowColor="@color/text_shadow"
-        android:shadowDx="@integer/text_shadow_dx"
-        android:shadowDy="@integer/text_shadow_dy"
-        android:shadowRadius="@integer/text_shadow_radius"
-        android:textColor="@color/text_color" />
+        tools:text="Acronym" />
 
 </LinearLayout>
