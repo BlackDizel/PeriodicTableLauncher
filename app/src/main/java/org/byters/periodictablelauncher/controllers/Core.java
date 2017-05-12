@@ -1,6 +1,7 @@
 package org.byters.periodictablelauncher.controllers;
 
 import android.app.Application;
+import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -8,10 +9,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import org.byters.periodictablelauncher.BuildConfig;
@@ -30,6 +33,11 @@ public class Core extends Application {
 
     public static Core getInstance() {
         return instance;
+    }
+
+    public static void hideKeyboard(Context context, IBinder windowToken) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Service.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(windowToken, 0);
     }
 
     @Override

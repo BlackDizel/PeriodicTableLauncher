@@ -14,6 +14,7 @@ import com.jrummyapps.android.colorpicker.ColorPickerView;
 
 import org.byters.periodictablelauncher.R;
 import org.byters.periodictablelauncher.controllers.ControllerItems;
+import org.byters.periodictablelauncher.controllers.Core;
 import org.byters.periodictablelauncher.models.AppDetail;
 
 public class FragmentItemEdit extends FragmentItemInfoBase
@@ -40,6 +41,7 @@ public class FragmentItemEdit extends FragmentItemInfoBase
 
     @Override
     public void onClick(View v) {
+        Core.hideKeyboard(getContext(), getView().getWindowToken());
         getActivity().onBackPressed();
     }
 
