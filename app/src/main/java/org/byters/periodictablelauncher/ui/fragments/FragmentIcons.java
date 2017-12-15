@@ -66,6 +66,7 @@ public class FragmentIcons extends FragmentBase
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_icons, container, false);
         setGrid(v);
+        setBackground(v);
         return v;
     }
 
@@ -87,6 +88,7 @@ public class FragmentIcons extends FragmentBase
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        setBackground(getView());
         setLayoutManager();
     }
 
@@ -115,8 +117,12 @@ public class FragmentIcons extends FragmentBase
         m.postScale(scale, scale);
 
         int imageContainerWidth = imageView.getWidth();
-        int imageWidth = (int) (imageView.getDrawable().getIntrinsicWidth() * scale);
-        if (imageWidth > imageContainerWidth) {
+        float imageWidth = imageView.getDrawable().getIntrinsicWidth() * scale;
+        float xScale = imageContainerWidth / imageWidth;
+        if (xScale > 1)
+            m.postScale(xScale, xScale);
+
+        if (xScale < 1) {
             float ratio = rvView.computeHorizontalScrollOffset() / (float) rvView.computeHorizontalScrollRange();
             int pos = -(int) ((imageWidth - imageView.getWidth()) * ratio);
             m.postTranslate(pos, 0);
