@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--@android:dimen/status_bar_height-->
+    <dimen name="padding_top_translucent">24dp</dimen>
+
+</resources>
