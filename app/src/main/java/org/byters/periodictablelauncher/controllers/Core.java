@@ -30,6 +30,7 @@ import java.util.List;
 public class Core extends Application {
 
     private static Core instance;
+    private Injector injector;
 
     public static Core getInstance() {
         return instance;
@@ -44,6 +45,7 @@ public class Core extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        injector = new Injector();
         ControllerPreference.getInstance().init();
     }
 
@@ -181,6 +183,10 @@ public class Core extends Application {
         intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(titleRes));
         intent.putExtra(Intent.EXTRA_TEXT, context.getString(bodyRes));
         return intent;
+    }
+
+    public Injector getInjector() {
+        return injector;
     }
 
     private class UpdateAppsAsync extends AsyncTask<Void, Void, ArrayList<AppDetail>> {
