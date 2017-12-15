@@ -1,8 +1,10 @@
 package org.byters.periodictablelauncher.ui.fragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import org.byters.periodictablelauncher.R;
 import org.byters.periodictablelauncher.controllers.ControllerItems;
 import org.byters.periodictablelauncher.controllers.Core;
 import org.byters.periodictablelauncher.models.AppDetail;
+import org.byters.periodictablelauncher.ui.activities.ActivityMain;
 
 public class FragmentItemEdit extends FragmentItemInfoBase
         implements View.OnClickListener, TextWatcher, ColorPickerView.OnColorChangedListener {
@@ -26,7 +29,22 @@ public class FragmentItemEdit extends FragmentItemInfoBase
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_item_edit, container, false);
+        View v = inflater.inflate(R.layout.fragment_item_edit_container, container, false);
+        initView(inflater, (ViewGroup) v);
+        return v;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        initView(LayoutInflater.from(getContext()), (ViewGroup) getView());
+    }
+
+    private void initView(LayoutInflater inflater, ViewGroup v) {
+        v.removeAllViews();
+
+        inflater.inflate(R.layout.fragment_item_edit, v, true);
 
         initLabels(v);
 
@@ -36,7 +54,7 @@ public class FragmentItemEdit extends FragmentItemInfoBase
 
         ((ColorPickerView) v.findViewById(R.id.cpv)).setColor(getColor());
 
-        return v;
+        ViewCompat.setTransitionName(v.findViewById(R.id.etTitle), ActivityMain.SHARED_ELEMENT_VIEW_NAME);
     }
 
     @Override
