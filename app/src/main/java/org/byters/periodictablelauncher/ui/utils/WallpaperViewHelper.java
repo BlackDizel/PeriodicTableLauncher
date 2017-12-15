@@ -15,7 +15,7 @@ public class WallpaperViewHelper {
         m = new Matrix();
     }
 
-    public void setBackground(ImageView imageView) {
+    public void setWallpaper(ImageView imageView) {
         Drawable wallpaperDrawable = WallpaperManager.getInstance(imageView.getContext()).getDrawable();
         if (wallpaperDrawable == null) return;
         imageView.setImageDrawable(wallpaperDrawable);
