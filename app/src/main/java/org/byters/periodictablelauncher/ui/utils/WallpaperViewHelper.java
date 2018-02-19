@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 public class WallpaperViewHelper {
 
-    private final Matrix m;
+    private Matrix m;
 
     public WallpaperViewHelper() {
         m = new Matrix();
@@ -32,6 +32,7 @@ public class WallpaperViewHelper {
         int imageContainerWidth = imageView.getWidth();
         float imageWidth = imageView.getDrawable().getIntrinsicWidth() * scale;
         float xScale = imageContainerWidth / imageWidth;
+
         if (xScale > 1)
             m.postScale(xScale, xScale);
 
@@ -40,6 +41,9 @@ public class WallpaperViewHelper {
             int pos = -(int) ((imageWidth - imageView.getWidth()) * ratio);
             m.postTranslate(pos, 0);
         }
+
+        if (xScale < 1 && recyclerView == null)
+            m.postTranslate(0, 0);
 
         imageView.setImageMatrix(m);
     }
