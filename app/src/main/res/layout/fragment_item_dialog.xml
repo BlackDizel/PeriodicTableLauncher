@@ -4,13 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/bg_gradient_top" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_gradient_bottom" />
+
     <ImageView
         android:id="@+id/ivBack"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackground"
         android:padding="12dp"
-        android:src="@drawable/ic_arrow_back_black_24dp" />
+        android:src="@drawable/ic_arrow_back_white_24dp" />
 
     <ImageView
         android:id="@+id/ivSettings"
@@ -19,7 +30,7 @@
         android:layout_gravity="end"
         android:background="?attr/selectableItemBackground"
         android:padding="12dp"
-        android:src="@drawable/ic_settings_black_24dp" />
+        android:src="@drawable/ic_settings_white_24dp" />
 
     <LinearLayout
         android:id="@+id/llText"

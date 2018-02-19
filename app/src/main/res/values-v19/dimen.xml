@@ -2,6 +2,6 @@
 <resources>
 
     <!--@android:dimen/status_bar_height-->
-    <dimen name="padding_top_translucent">24dp</dimen>
+    <dimen name="padding_top_translucent">25dp</dimen>
 
 </resources>
