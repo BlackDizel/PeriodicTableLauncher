@@ -62,7 +62,7 @@ public class ControllerItems extends ControllerItemsBase {
     }
 
     public Uri getSelectedItemUri() {
-        return selectedItem == null ? null : Uri.fromParts(PACKAGE, selectedItem.getName(), null);
+        return selectedItem == null ? null : Uri.fromParts(PACKAGE, selectedItem.getPackageName(), null);
     }
 
     public void setSelectedItem(@Nullable AppDetail item) {
