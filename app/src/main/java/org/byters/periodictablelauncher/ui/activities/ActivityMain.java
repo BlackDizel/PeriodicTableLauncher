@@ -2,8 +2,13 @@ package org.byters.periodictablelauncher.ui.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.support.transition.ChangeBounds;
+import android.support.transition.ChangeClipBounds;
+import android.support.transition.ChangeTransform;
+import android.support.transition.TransitionSet;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 
 import org.byters.periodictablelauncher.R;
@@ -25,6 +30,8 @@ import java.lang.ref.WeakReference;
 public class ActivityMain extends ActivityBase
         implements ListenerWallpaperChange {
 
+    public static final String SHARED_ELEMENT_VIEW_NAME = "shared_view";
+    public static final String SHARED_ELEMENT_VIEW_NAME_2 = "shared_view_2";
     private ImageView imageView;
     private WallpaperViewHelper wallpaperViewHelper;
     private WeakReference<IPresenterWallpaper> refPresenterWallpaper;
@@ -34,7 +41,8 @@ public class ActivityMain extends ActivityBase
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageView);
+        imageView.addOnLayoutChangeListener(new BackgroundLayoutChangeListener());
 
         wallpaperViewHelper = new WallpaperViewHelper();
 
@@ -52,22 +60,43 @@ public class ActivityMain extends ActivityBase
     }
 
     private void setFragmentItemInfo() {
+
+        Fragment fragment = FragmentItemInfo.getFragment();
+        setTransitionsShared(fragment);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .replace(R.id.flContent, FragmentItemInfo.getFragment())
+                .replace(R.id.flContent, fragment)
                 .commit();
+    }
+
+    private void setFragmentItemEdit(View view, View view2) {
+
+        Fragment fragment = FragmentItemEdit.getFragment();
+        setTransitionsShared(fragment);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .addSharedElement(view, SHARED_ELEMENT_VIEW_NAME)
+                .addSharedElement(view2, SHARED_ELEMENT_VIEW_NAME_2)
+                .replace(R.id.flContent, fragment)
+                .commit();
+    }
+
+    private void setTransitionsShared(Fragment fragment) {
+        TransitionSet transitionSet = new TransitionSet();
+        transitionSet.addTransition(new ChangeBounds());
+        transitionSet.addTransition(new ChangeTransform());
+        transitionSet.addTransition(new ChangeClipBounds());
+
+        fragment.setSharedElementEnterTransition(transitionSet);
+        fragment.setSharedElementReturnTransition(transitionSet);
     }
 
     @Override
     public void onWallpaperChange() {
-        wallpaperViewHelper.setWallpaper(imageView);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
         wallpaperViewHelper.setWallpaper(imageView);
     }
 
@@ -92,28 +121,26 @@ public class ActivityMain extends ActivityBase
     }
 
     @Override
-    public void onNavigate(NavigationType type) {
+    public void onNavigate(NavigationType type, View view, View view2) {
         if (type == NavigationType.TYPE_ITEM_INFO)
             setFragmentItemInfo();
         else if (type == NavigationType.TYPE_ITEMS)
             setFragmentGrid();
         else if (type == NavigationType.TYPE_ITEM_EDIT)
-            setFragmentItemEdit();
-    }
-
-    private void setFragmentItemEdit() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .addToBackStack(null)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .replace(R.id.flContent, FragmentItemEdit.getFragment())
-                .commit();
+            setFragmentItemEdit(view, view2);
     }
 
     private class CallbackWallpaperPresenter implements PresenterWallpaperCallback {
         @Override
         public void updateWallpaper(RecyclerView recyclerView) {
             wallpaperViewHelper.updateWallpaperPosition(imageView, recyclerView);
+        }
+    }
+
+    private class BackgroundLayoutChangeListener implements View.OnLayoutChangeListener {
+        @Override
+        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+            wallpaperViewHelper.updateWallpaperPosition(imageView, null);
         }
     }
 }

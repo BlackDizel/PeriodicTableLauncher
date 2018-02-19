@@ -1,5 +1,7 @@
 package org.byters.periodictablelauncher.ui;
 
+import android.view.View;
+
 public class NavigationHelper extends NavigationHelperBase {
     private static NavigationHelper instance;
 
@@ -9,14 +11,14 @@ public class NavigationHelper extends NavigationHelperBase {
     }
 
     public void navigateItemInfo() {
-        norifyListeners(ListenerNavigation.NavigationType.TYPE_ITEM_INFO);
+        notifyListeners(ListenerNavigation.NavigationType.TYPE_ITEM_INFO, null, null);
     }
 
     public void navigateItems() {
-        norifyListeners(ListenerNavigation.NavigationType.TYPE_ITEMS);
+        notifyListeners(ListenerNavigation.NavigationType.TYPE_ITEMS, null, null);
     }
 
-    public void navigateItemEdit() {
-        norifyListeners(ListenerNavigation.NavigationType.TYPE_ITEM_EDIT);
+    public void navigateItemEdit(View view, View view2) {
+        notifyListeners(ListenerNavigation.NavigationType.TYPE_ITEM_EDIT, view, view2);
     }
 }

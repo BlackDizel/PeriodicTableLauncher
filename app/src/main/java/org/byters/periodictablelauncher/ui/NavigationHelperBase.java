@@ -1,5 +1,7 @@
 package org.byters.periodictablelauncher.ui;
 
+import android.view.View;
+
 import java.util.ArrayList;
 
 class NavigationHelperBase {
@@ -15,9 +17,9 @@ class NavigationHelperBase {
         listeners.remove(listener);
     }
 
-    public void norifyListeners(ListenerNavigation.NavigationType navigationType) {
+    public void notifyListeners(ListenerNavigation.NavigationType navigationType, View view, View view2) {
         if (listeners == null) return;
         for (ListenerNavigation item : listeners)
-            item.onNavigate(navigationType);
+            item.onNavigate(navigationType, view, view2);
     }
 }

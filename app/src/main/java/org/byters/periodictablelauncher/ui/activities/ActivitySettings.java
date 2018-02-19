@@ -114,7 +114,7 @@ public class ActivitySettings extends ActivityBase {
     }
 
     @Override
-    public void onNavigate(NavigationType type) {
+    public void onNavigate(NavigationType type, View view, View view2) {
 
     }
 

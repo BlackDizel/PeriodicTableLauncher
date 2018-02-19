@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import org.byters.periodictablelauncher.R;
 import org.byters.periodictablelauncher.controllers.ControllerItems;
 import org.byters.periodictablelauncher.controllers.Core;
 import org.byters.periodictablelauncher.ui.NavigationHelper;
+import org.byters.periodictablelauncher.ui.activities.ActivityMain;
 
 public class FragmentItemInfo extends FragmentItemInfoBase
         implements View.OnClickListener {
@@ -30,6 +32,10 @@ public class FragmentItemInfo extends FragmentItemInfoBase
         v.findViewById(R.id.tvRemove).setOnClickListener(this);
         v.findViewById(R.id.ivBack).setOnClickListener(this);
         v.findViewById(R.id.ivSettings).setOnClickListener(this);
+
+        ViewCompat.setTransitionName(v.findViewById(R.id.etTitle), ActivityMain.SHARED_ELEMENT_VIEW_NAME);
+        ViewCompat.setTransitionName(v.findViewById(R.id.tvLabel), ActivityMain.SHARED_ELEMENT_VIEW_NAME_2);
+
         return v;
     }
 
@@ -49,7 +55,7 @@ public class FragmentItemInfo extends FragmentItemInfoBase
                 NavigationHelper.getInstance().navigateItems();
                 break;
             case R.id.ivSettings:
-                NavigationHelper.getInstance().navigateItemEdit();
+                NavigationHelper.getInstance().navigateItemEdit(getView().findViewById(R.id.etTitle), getView().findViewById(R.id.tvLabel));
                 break;
             case R.id.ivBack:
                 getActivity().onBackPressed();
