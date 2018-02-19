@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.EditText;
 
 import com.jrummyapps.android.colorpicker.ColorPickerView;
@@ -55,6 +56,18 @@ public class FragmentItemEdit extends FragmentItemInfoBase
         ((ColorPickerView) v.findViewById(R.id.cpv)).setColor(getColor());
 
         ViewCompat.setTransitionName(v.findViewById(R.id.etTitle), ActivityMain.SHARED_ELEMENT_VIEW_NAME);
+        ViewCompat.setTransitionName(v.findViewById(R.id.tvLabel), ActivityMain.SHARED_ELEMENT_VIEW_NAME_2);
+
+        animateEntrance(v);
+    }
+
+    private void animateEntrance(ViewGroup v) {
+        AlphaAnimation animationAlpha = new AlphaAnimation(0, 1);
+        animationAlpha.setStartOffset(250);
+        animationAlpha.setDuration(250);
+        animationAlpha.setFillAfter(true);
+        v.findViewById(R.id.cpv).setAnimation(animationAlpha);
+        animationAlpha.start();
     }
 
     @Override
