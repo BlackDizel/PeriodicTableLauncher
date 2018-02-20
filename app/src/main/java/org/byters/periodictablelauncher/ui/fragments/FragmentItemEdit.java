@@ -18,8 +18,8 @@ import com.jrummyapps.android.colorpicker.ColorPickerView;
 import org.byters.periodictablelauncher.R;
 import org.byters.periodictablelauncher.controllers.ControllerItems;
 import org.byters.periodictablelauncher.controllers.Core;
+import org.byters.periodictablelauncher.controllers.TransitionsHelper;
 import org.byters.periodictablelauncher.models.AppDetail;
-import org.byters.periodictablelauncher.ui.activities.ActivityMain;
 
 public class FragmentItemEdit extends FragmentItemInfoBase
         implements View.OnClickListener, TextWatcher, ColorPickerView.OnColorChangedListener {
@@ -55,8 +55,8 @@ public class FragmentItemEdit extends FragmentItemInfoBase
 
         ((ColorPickerView) v.findViewById(R.id.cpv)).setColor(getColor());
 
-        ViewCompat.setTransitionName(v.findViewById(R.id.etTitle), ActivityMain.SHARED_ELEMENT_VIEW_NAME);
-        ViewCompat.setTransitionName(v.findViewById(R.id.tvLabel), ActivityMain.SHARED_ELEMENT_VIEW_NAME_2);
+        ViewCompat.setTransitionName(v.findViewById(R.id.etTitle), TransitionsHelper.getViewName1());
+        ViewCompat.setTransitionName(v.findViewById(R.id.tvLabel), TransitionsHelper.getViewName2());
 
         animateEntrance(v);
     }

@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import org.byters.periodictablelauncher.R;
 import org.byters.periodictablelauncher.controllers.ControllerItems;
 import org.byters.periodictablelauncher.controllers.Core;
+import org.byters.periodictablelauncher.controllers.TransitionsHelper;
 import org.byters.periodictablelauncher.ui.NavigationHelper;
-import org.byters.periodictablelauncher.ui.activities.ActivityMain;
 
 public class FragmentItemInfo extends FragmentItemInfoBase
         implements View.OnClickListener {
@@ -33,8 +33,8 @@ public class FragmentItemInfo extends FragmentItemInfoBase
         v.findViewById(R.id.ivBack).setOnClickListener(this);
         v.findViewById(R.id.ivSettings).setOnClickListener(this);
 
-        ViewCompat.setTransitionName(v.findViewById(R.id.etTitle), ActivityMain.SHARED_ELEMENT_VIEW_NAME);
-        ViewCompat.setTransitionName(v.findViewById(R.id.tvLabel), ActivityMain.SHARED_ELEMENT_VIEW_NAME_2);
+        ViewCompat.setTransitionName(v.findViewById(R.id.etTitle), TransitionsHelper.getViewName1());
+        ViewCompat.setTransitionName(v.findViewById(R.id.tvLabel), TransitionsHelper.getViewName2());
 
         return v;
     }

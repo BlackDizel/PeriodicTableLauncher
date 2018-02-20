@@ -10,6 +10,7 @@ import org.byters.periodictablelauncher.R;
 import org.byters.periodictablelauncher.controllers.ControllerItems;
 import org.byters.periodictablelauncher.controllers.ControllerPreference;
 import org.byters.periodictablelauncher.controllers.Core;
+import org.byters.periodictablelauncher.controllers.TransitionsHelper;
 import org.byters.periodictablelauncher.models.AppDetail;
 import org.byters.periodictablelauncher.ui.NavigationHelper;
 
@@ -44,15 +45,21 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
             item = null;
-            tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
-            tvSubtitle = (TextView) itemView.findViewById(R.id.tvSubtitle);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvSubtitle = itemView.findViewById(R.id.tvSubtitle);
         }
 
         public void setData(int position) {
             item = ControllerItems.getInstance().getItem(position);
+            setTransitionName();
             setShadow();
             setColor();
             setText();
+        }
+
+        private void setTransitionName() {
+            TransitionsHelper.setTransitionView1(item, tvTitle);
+            TransitionsHelper.setTransitionView2(item, tvSubtitle);
         }
 
         private void setText() {
@@ -108,7 +115,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
             if (item == null) return true;
             ControllerItems.getInstance().setSelectedItem(item);
 
-            NavigationHelper.getInstance().navigateItemInfo();
+            NavigationHelper.getInstance().navigateItemInfo(tvTitle, tvSubtitle);
 
             return true;
         }

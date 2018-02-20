@@ -10,8 +10,8 @@ public class NavigationHelper extends NavigationHelperBase {
         return instance;
     }
 
-    public void navigateItemInfo() {
-        notifyListeners(ListenerNavigation.NavigationType.TYPE_ITEM_INFO, null, null);
+    public void navigateItemInfo(View view1, View view2) {
+        notifyListeners(ListenerNavigation.NavigationType.TYPE_ITEM_INFO, view1, view2);
     }
 
     public void navigateItems() {

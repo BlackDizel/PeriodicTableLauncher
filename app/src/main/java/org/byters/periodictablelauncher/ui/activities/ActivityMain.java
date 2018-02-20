@@ -1,12 +1,12 @@
 package org.byters.periodictablelauncher.ui.activities;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.transition.ChangeBounds;
 import android.support.transition.ChangeClipBounds;
 import android.support.transition.ChangeTransform;
 import android.support.transition.TransitionSet;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,8 +30,6 @@ import java.lang.ref.WeakReference;
 public class ActivityMain extends ActivityBase
         implements ListenerWallpaperChange {
 
-    public static final String SHARED_ELEMENT_VIEW_NAME = "shared_view";
-    public static final String SHARED_ELEMENT_VIEW_NAME_2 = "shared_view_2";
     private ImageView imageView;
     private WallpaperViewHelper wallpaperViewHelper;
     private WeakReference<IPresenterWallpaper> refPresenterWallpaper;
@@ -59,7 +57,7 @@ public class ActivityMain extends ActivityBase
                 .commit();
     }
 
-    private void setFragmentItemInfo() {
+    private void setFragmentItemInfo(View view, View view2) {
 
         Fragment fragment = FragmentItemInfo.getFragment();
         setTransitionsShared(fragment);
@@ -67,6 +65,8 @@ public class ActivityMain extends ActivityBase
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
+                .addSharedElement(view, ViewCompat.getTransitionName(view))
+                .addSharedElement(view2, ViewCompat.getTransitionName(view2))
                 .replace(R.id.flContent, fragment)
                 .commit();
     }
@@ -79,8 +79,8 @@ public class ActivityMain extends ActivityBase
         getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack(null)
-                .addSharedElement(view, SHARED_ELEMENT_VIEW_NAME)
-                .addSharedElement(view2, SHARED_ELEMENT_VIEW_NAME_2)
+                .addSharedElement(view, ViewCompat.getTransitionName(view))
+                .addSharedElement(view2, ViewCompat.getTransitionName(view2))
                 .replace(R.id.flContent, fragment)
                 .commit();
     }
@@ -123,7 +123,7 @@ public class ActivityMain extends ActivityBase
     @Override
     public void onNavigate(NavigationType type, View view, View view2) {
         if (type == NavigationType.TYPE_ITEM_INFO)
-            setFragmentItemInfo();
+            setFragmentItemInfo(view, view2);
         else if (type == NavigationType.TYPE_ITEMS)
             setFragmentGrid();
         else if (type == NavigationType.TYPE_ITEM_EDIT)
