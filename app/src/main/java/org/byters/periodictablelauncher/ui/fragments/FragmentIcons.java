@@ -9,13 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.byters.periodictablelauncher.R;
 import org.byters.periodictablelauncher.controllers.ControllerItems;
-import org.byters.periodictablelauncher.controllers.ControllerPreference;
 import org.byters.periodictablelauncher.controllers.Core;
 import org.byters.periodictablelauncher.controllers.ListenerAppsUpdate;
-import org.byters.periodictablelauncher.models.ModelPreference;
 import org.byters.periodictablelauncher.ui.adapters.ItemsAdapter;
 import org.byters.periodictablelauncher.view.presenter.IPresenterWallpaper;
 
@@ -54,7 +53,6 @@ public class FragmentIcons extends FragmentBase
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         scrollListener = new RecyclerViewScrollListener();
-
         refPresenterWallpaper = new WeakReference<>(Core.getInstance().getInjector().getPresenterWallpaper());
     }
 
@@ -67,7 +65,7 @@ public class FragmentIcons extends FragmentBase
     }
 
     private void setGrid(View v) {
-        rvView = (RecyclerView) v.findViewById(R.id.rvItems);
+        rvView = v.findViewById(R.id.rvItems);
         rvView.setAdapter(new ItemsAdapter());
         setLayoutManager();
         rvView.addOnScrollListener(scrollListener);
@@ -80,14 +78,44 @@ public class FragmentIcons extends FragmentBase
     }
 
     private void setLayoutManager() {
-        int orientation = ControllerPreference.getInstance().getAppListOrientation() == ModelPreference.ORIENTATION_HORIZONTAL
+        //TODO implement
+        /*int orientation = ControllerPreference.getInstance().getAppListOrientation() == ModelPreference.ORIENTATION_HORIZONTAL
+                ? GridLayoutManager.HORIZONTAL
+                : GridLayoutManager.VERTICAL;*/
+
+        int orientation = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT
                 ? GridLayoutManager.HORIZONTAL
                 : GridLayoutManager.VERTICAL;
 
         rvView.setLayoutManager(new GridLayoutManager(getContext()
-                , getResources().getInteger(R.integer.columns)
+                , getColumns(orientation)
                 , orientation
                 , false));
+    }
+
+    private int getColumns(int gridOrientation) {
+
+        View view = LayoutInflater.from(getContext())
+                .inflate(R.layout.view_item, null);
+        ((TextView) view.findViewById(R.id.tvTitle)).setText("Mm");
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+
+        return getColumns(gridOrientation,
+                getResources().getDisplayMetrics().widthPixels,
+                getResources().getDisplayMetrics().heightPixels,
+                view.getMeasuredWidth(),
+                view.getMeasuredHeight());
+    }
+
+    public static int getColumns(int gridOrientation, int screenW, int screenH, int cellW, int cellH) {
+
+        if (cellH == 0 || cellW == 0) return 1;
+
+        int spanNum = gridOrientation==GridLayoutManager.HORIZONTAL
+                ? screenH / cellH
+                : screenW / cellW;
+
+        return Math.max(spanNum, 1);
     }
 
     private class RecyclerViewScrollListener extends RecyclerView.OnScrollListener {
