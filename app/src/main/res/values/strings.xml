@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">Periodic Table Launcher</string>
+
     <string name="vowels_eng">[aeiou]</string>
     <string name="vowels_rus">[уеыаоэяиюё]</string>
+    <string name="play_market_address_format">https://play.google.com/store/apps/details?id=%s</string>
+    <string name="request_buy_email">mailto:blackdizel@gmail.com</string>
+
+    <string name="app_name">Periodic Table Launcher</string>
     <string name="item_subtitle_error">no data</string>
     <string name="item_title_error"> </string>
     <string name="item_options_info">INFO</string>
@@ -32,12 +36,10 @@
     <string name="wallpaper_choose_dialog_title">Select Wallpaper</string>
     <string name="settings_feedback">Feedback</string>
     <string name="settings_support">Support</string>
-    <string name="play_market_address_format">https://play.google.com/store/apps/details?id=%s</string>
-    <string name="browser_error">Браузер не найден</string>
+    <string name="browser_error">Browser not found</string>
     <string name="email_app_error_no_found">email app not found</string>
     <string name="feedback_message_title">periodic table launcher support request</string>
     <string name="feedback_message_body">hi</string>
-    <string name="request_buy_email">mailto:blackdizel@gmail.com</string>
     <string name="message_cache_removed">Cache removed</string>
     <string name="message_color_reset">custom app icons color resetted</string>
     <string name="message_labels_reset">custom app icons labels resetted</string>

@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Текстовый табличный лаунчер</string>
+    <string name="item_subtitle_error">нет данных</string>
+    <string name="item_title_error"> </string>
+    <string name="item_options_info">детали</string>
+    <string name="item_options_remove">удалить</string>
+    <string name="item_options_edit">изменить</string>
+    <string name="setings_select_background">выбрать фон</string>
+    <string name="settings_search_panel">Панель поиска</string>
+    <string name="settings_icons_settings">Настройка иконок</string>
+    <string name="settings_default_text_color">стандартный цвет текста</string>
+    <string name="settings_shadow">тень</string>
+    <string name="settings_grid_settings">Настройки таблицы</string>
+    <string name="settings_grid_size">Размер таблицы</string>
+    <string name="settings_scroll_orientation">Направление скролла</string>
+    <string name="settings_scroll_horizontal">горизонтальное</string>
+    <string name="settings_scroll_vertical">вертикальное</string>
+    <string name="settings_sorting_method">Способ сортировки</string>
+    <string name="settings_scroll_full_title">По полному названию</string>
+    <string name="settings_scroll_label">По тексту ярлыка</string>
+    <string name="settings_scroll_date">По дате</string>
+    <string name="settings_sorting_orientation">Направление сортировки</string>
+    <string name="settings_sort_ascending">Прямое</string>
+    <string name="settings_sort_descending">Обратное</string>
+    <string name="settings_maintenance">Служебные</string>
+    <string name="settings_reset_icons_labels">Сбросить тексты ярлыков</string>
+    <string name="settings_reset_icons_color">Сбросить цвет ярлыков</string>
+    <string name="settings_reset_cache">Сюроситьт кэш</string>
+    <string name="settings_version" formatted="false">версия %s1 (%s2)</string>
+    <string name="wallpaper_choose_dialog_title">Выбор фона</string>
+    <string name="settings_feedback">Обратная связь</string>
+    <string name="settings_support">Поддержка</string>
+    <string name="browser_error">Браузер не найден</string>
+    <string name="email_app_error_no_found">Не найдено приложение для отправки электронных писем</string>
+    <string name="feedback_message_title">Запрос поддержки по приложению текстового табличного лаунчера</string>
+    <string name="feedback_message_body">Здравствуйте!</string>
+    <string name="message_cache_removed">Кэш очищен</string>
+    <string name="message_color_reset">Цвет иконок сброшен</string>
+    <string name="message_labels_reset">Текст ярлыков сброшен</string>
+
+</resources>
