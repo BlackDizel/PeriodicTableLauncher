@@ -19,6 +19,7 @@
         android:id="@+id/ivBack"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginTop="@dimen/padding_top_translucent"
         android:background="?attr/selectableItemBackground"
         android:padding="12dp"
         android:src="@drawable/ic_arrow_back_white_24dp" />
@@ -28,6 +29,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="end"
+        android:layout_marginTop="@dimen/padding_top_translucent"
         android:background="?attr/selectableItemBackground"
         android:padding="12dp"
         android:src="@drawable/ic_settings_white_24dp" />
