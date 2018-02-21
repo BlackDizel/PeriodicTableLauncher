@@ -30,4 +30,6 @@ dependencies {
     compile "com.android.support:design:$support_version"
 
     compile 'com.jrummyapps:colorpicker:2.1.6'
+
+    testCompile 'junit:junit:4.12'
 }
