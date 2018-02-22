@@ -1,9 +1,9 @@
 <resources>
 
-    <string name="vowels_eng">[aeiou]</string>
-    <string name="vowels_rus">[уеыаоэяиюё]</string>
-    <string name="play_market_address_format">https://play.google.com/store/apps/details?id=%s</string>
-    <string name="request_buy_email">mailto:blackdizel@gmail.com</string>
+    <string name="vowels_eng" translatable="false">[aeiou]</string>
+    <string name="vowels_rus" translatable="false">[уеыаоэяиюё]</string>
+    <string name="play_market_address_format" translatable="false">https://play.google.com/store/apps/details?id=%s</string>
+    <string name="request_buy_email" translatable="false">mailto:blackdizel@gmail.com</string>
 
     <string name="app_name">Periodic Table Launcher</string>
     <string name="item_subtitle_error">no data</string>
