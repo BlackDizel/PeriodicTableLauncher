@@ -114,15 +114,26 @@ public class Core extends Application {
     }
 
     public String getTitle(String label) {
-        String buffer = label.toLowerCase().replaceAll(getString(R.string.vowels_eng), "");
-        buffer = buffer.replaceAll(" ", "");
-        buffer = buffer.replaceAll(getString(R.string.vowels_rus), "");
-        buffer = buffer.substring(0, Math.min(AppDetail.MAX_ITEM_TITLE_LENGTH, buffer.length()));
-        if (buffer.length() > 1)
-            buffer = Character.toUpperCase(buffer.charAt(0)) + buffer.substring(1);
+        if (TextUtils.isEmpty(label)) return "?";
 
-        //empty strings allowed
-        return buffer;
+        String result;
+
+        String buffer = label.replaceAll("[0123456789]", "");
+
+        if (TextUtils.isEmpty(buffer) || buffer.length() < 1) return "?";
+
+        result = String.valueOf(Character.toUpperCase(buffer.charAt(0)));
+
+        buffer = buffer
+                .substring(1)
+                .toLowerCase()
+                .replaceAll(" ", "")
+                .replaceAll(getString(R.string.vowels_eng), "")
+                .replaceAll(getString(R.string.vowels_rus), "");
+
+        if (TextUtils.isEmpty(buffer) || buffer.length() < 1) return result;
+
+        return result + buffer.substring(0, 1);
     }
 
     public void startActivity(String packageName, String name) {
