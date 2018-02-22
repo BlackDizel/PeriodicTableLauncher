@@ -7,6 +7,7 @@
         android:id="@+id/rvItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/padding_top_translucent" />
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/padding_top_translucent" />
 
 </FrameLayout>
