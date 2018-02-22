@@ -16,6 +16,7 @@ public class AppDetail implements Comparable, Serializable {
     private int color;
     private long date;
     private String packageName;
+    private String activityName;
 
     public AppDetail() {
         resetColor();
@@ -45,11 +46,11 @@ public class AppDetail implements Comparable, Serializable {
         this.label = label;
     }
 
-    public String getName() {
+    public String getFullName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setFullName(String name) {
         this.name = name;
     }
 
@@ -98,5 +99,13 @@ public class AppDetail implements Comparable, Serializable {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
+
+    public String getActviityName() {
+        return activityName;
     }
 }

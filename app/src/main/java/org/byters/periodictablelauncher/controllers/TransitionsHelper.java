@@ -22,7 +22,7 @@ public class TransitionsHelper {
     }
 
     private static String getViewName(String name, AppDetail item) {
-        return name + "_" + item.getPackageName() + "_" + item.getName();
+        return name + "_" + item.getFullName();
     }
 
     public static void setTransitionView2(AppDetail item, View view) {

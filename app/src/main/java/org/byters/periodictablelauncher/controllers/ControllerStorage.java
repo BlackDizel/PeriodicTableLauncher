@@ -31,7 +31,7 @@ class ControllerStorage {
         if (data != null && data.size() > 0)
             for (AppDetail item : data) {
                 if (cache == null) cache = new HashMap<>();
-                cache.put(item.getName(), item);
+                cache.put(item.getFullName(), item);
             }
 
         writeObjectToFile(context, cache, FILE_CACHE);

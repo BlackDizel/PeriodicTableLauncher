@@ -14,6 +14,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.text.TextUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -71,7 +72,7 @@ public class Core extends Application {
 
         ArrayList<AppDetail> result = new ArrayList<>();
         for (AppDetail itemLeft : left) {
-            String name = itemLeft.getName();
+            String name = itemLeft.getFullName();
             AppDetail item = right.containsKey(name) ? right.get(name) : itemLeft;
             result.add(item);
         }
@@ -89,7 +90,9 @@ public class Core extends Application {
         for (ResolveInfo ri : availableActivities) {
             AppDetail app = new AppDetail();
             app.setPackageName(ri.activityInfo.packageName);
-            app.setName(ri.activityInfo.name);
+
+            app.setActivityName(ri.activityInfo.name);
+            app.setFullName(ri.activityInfo.packageName + "_" + ri.activityInfo.name);
 
             long time = System.currentTimeMillis();
             try {
