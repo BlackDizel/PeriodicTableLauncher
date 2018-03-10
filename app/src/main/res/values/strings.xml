@@ -6,6 +6,7 @@
     <string name="request_buy_email" translatable="false">mailto:blackdizel@gmail.com</string>
 
     <string name="app_name">Periodic Table Launcher</string>
+    <string name="app_name_settings">Settings</string>
     <string name="item_subtitle_error">no data</string>
     <string name="item_title_error"> </string>
     <string name="item_options_info">INFO</string>
