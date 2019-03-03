@@ -29,6 +29,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation "com.android.support:recyclerview-v7:$support_version"
     implementation "com.android.support:design:$support_version"
+    implementation 'com.arasthel:spannedgridlayoutmanager:3.0.2'
 
     implementation "com.google.code.gson:gson:2.8.5"
 

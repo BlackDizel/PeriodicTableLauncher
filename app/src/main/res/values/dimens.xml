@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="item_title_padding_horizontal">16dp</dimen>
-    <dimen name="item_margin">8dp</dimen>
+    <dimen name="item_title_padding_horizontal">4dp</dimen>
     <dimen name="item_options_padding">16dp</dimen>
 
     <dimen name="padding_top_translucent">0dp</dimen>

@@ -3,12 +3,13 @@ package org.byters.periodictablelauncher.view.ui.fragments;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.arasthel.spannedgridlayoutmanager.SpannedGridLayoutManager;
 
 import org.byters.periodictablelauncher.ApplicationLauncher;
 import org.byters.periodictablelauncher.R;
@@ -26,13 +27,15 @@ public class FragmentApps extends FragmentBase {
 
     private RecyclerViewScrollListener scrollListener;
 
-    public static int getColumns(int gridOrientation, int screenW, int screenH, int cellW, int cellH) {
+    public static int getColumns(SpannedGridLayoutManager.Orientation gridOrientation, int screenW, int screenH, int cellW, int cellH) {
 
         if (cellH == 0 || cellW == 0) return 1;
 
-        int spanNum = gridOrientation == GridLayoutManager.HORIZONTAL
-                ? screenH / cellH
-                : screenW / cellW;
+        int maxSize = Math.max(cellH, cellW);
+
+        int spanNum = gridOrientation == SpannedGridLayoutManager.Orientation.HORIZONTAL
+                ? screenH / maxSize
+                : screenW / maxSize;
 
         return Math.max(spanNum, 1);
     }
@@ -72,17 +75,14 @@ public class FragmentApps extends FragmentBase {
                 ? GridLayoutManager.HORIZONTAL
                 : GridLayoutManager.VERTICAL;*/
 
-        int orientation = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT
-                ? GridLayoutManager.HORIZONTAL
-                : GridLayoutManager.VERTICAL;
+        SpannedGridLayoutManager.Orientation orientation = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT
+                ? SpannedGridLayoutManager.Orientation.HORIZONTAL
+                : SpannedGridLayoutManager.Orientation.VERTICAL;
 
-        rvView.setLayoutManager(new GridLayoutManager(getContext()
-                , getColumns(orientation)
-                , orientation
-                , false));
+        rvView.setLayoutManager(new SpannedGridLayoutManager(orientation, getColumns(orientation)));
     }
 
-    private int getColumns(int gridOrientation) {
+    private int getColumns(SpannedGridLayoutManager.Orientation gridOrientation) {
 
         View view = LayoutInflater.from(getContext())
                 .inflate(R.layout.view_item, null);
