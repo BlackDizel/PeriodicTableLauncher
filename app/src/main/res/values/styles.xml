@@ -6,7 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme" parent="AppThemeBase"/>
+    <style name="AppTheme" parent="AppThemeBase" />
 
     <style name="item_info_dialog_item">
         <item name="android:textAppearance">@style/Base.TextAppearance.AppCompat.Button</item>
@@ -17,6 +17,15 @@
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/item_options_padding</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="settings_button">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:background">@drawable/bg_round_white</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
     </style>
 
 </resources>
