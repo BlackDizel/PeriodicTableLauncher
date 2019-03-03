@@ -7,8 +7,6 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.transition.ChangeBounds;
-import android.support.transition.ChangeClipBounds;
 import android.support.transition.ChangeTransform;
 import android.support.transition.TransitionSet;
 import android.support.v4.app.Fragment;
@@ -41,10 +39,11 @@ public class Navigator implements INavigator {
         refActivity.get().startActivity(intent);
     }
 
+    @Override
     public void startActivitySetWallpaper() {
         if (refActivity == null || refActivity.get() == null) return;
         Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
-        Intent.createChooser(intent, refActivity.get().getString(R.string.wallpaper_choose_dialog_title));
+        refActivity.get().startActivity(Intent.createChooser(intent, refActivity.get().getString(R.string.wallpaper_choose_dialog_title)));
     }
 
     private Intent getLauncherIntent(String packageName, String name) {
@@ -83,7 +82,7 @@ public class Navigator implements INavigator {
             return;
         }
 
-        Intent.createChooser(intentSend, "");
+        refActivity.get().startActivity(Intent.createChooser(intentSend, ""));
     }
 
     @Override
