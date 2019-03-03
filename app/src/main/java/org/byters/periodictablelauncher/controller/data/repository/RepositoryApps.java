@@ -10,17 +10,15 @@ import android.text.TextUtils;
 
 import org.byters.periodictablelauncher.ApplicationLauncher;
 import org.byters.periodictablelauncher.controller.data.memorycache.ICacheApps;
-import org.byters.periodictablelauncher.controller.data.memorycache.ICachePreferences;
 import org.byters.periodictablelauncher.model.AppDetail;
 import org.byters.periodictablelauncher.model.AppsCache;
 import org.byters.periodictablelauncher.model.FileEnum;
-import org.byters.periodictablelauncher.model.ModelPreference;
+import org.byters.periodictablelauncher.view.util.HelperAppsCompare;
 import org.byters.periodictablelauncher.view.util.IHelperStorage;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,15 +35,14 @@ public class RepositoryApps implements IRepositoryApps {
     @Inject
     WeakReference<Application> refApplication;
 
-    @Inject
-    ICachePreferences cachePreferences;
 
-    private CustomComparator comparator;
+    @Inject
+    HelperAppsCompare helperAppsCompare;
+
     private UpdateAppsAsync request;
 
     public RepositoryApps() {
         ApplicationLauncher.getComponent().inject(this);
-        comparator = new CustomComparator();
     }
 
     @Override
@@ -53,7 +50,7 @@ public class RepositoryApps implements IRepositoryApps {
         if (request != null)
             request.cancel(true);
 
-        request = new UpdateAppsAsync(refApplication, helperStorage, cacheApps, comparator);
+        request = new UpdateAppsAsync(refApplication, helperStorage, cacheApps, helperAppsCompare);
 
         request.execute();
     }
@@ -63,9 +60,9 @@ public class RepositoryApps implements IRepositoryApps {
         private final WeakReference<Application> refApp;
         private final ICacheApps cacheApps;
         private final IHelperStorage helperStorage;
-        private final CustomComparator comparator;
+        private final HelperAppsCompare comparator;
 
-        UpdateAppsAsync(WeakReference<Application> refApp, IHelperStorage helperStorage, ICacheApps cacheApps, CustomComparator comparator) {
+        UpdateAppsAsync(WeakReference<Application> refApp, IHelperStorage helperStorage, ICacheApps cacheApps, HelperAppsCompare comparator) {
             this.refApp = refApp;
             this.cacheApps = cacheApps;
             this.helperStorage = helperStorage;
@@ -127,7 +124,7 @@ public class RepositoryApps implements IRepositoryApps {
 
             if (result == null) return null;
 
-            Collections.sort(result, comparator);
+            Collections.sort(result, comparator.getComparator());
             return result;
         }
 
@@ -166,26 +163,5 @@ public class RepositoryApps implements IRepositoryApps {
         }
     }
 
-    private class CustomComparator implements Comparator<AppDetail> {
-        @Override
-        public int compare(AppDetail o1, AppDetail other) {
-            int sortOrientationFactor = cachePreferences.getSortOrientation() == ModelPreference.SORT_ORIENT_ASC ? 1 : -1;
-            int compareResult = cachePreferences.getSortMethod() == ModelPreference.SORT_FULLTITLE
-                    ? o1.getLabel().compareTo(other.getLabel())
-                    : cachePreferences.getSortMethod() == ModelPreference.SORT_LABEL
-                    ? o1.getTitle().compareTo(other.getTitle())
-                    : compareDate(o1.getDate(), other.getDate());
-            return sortOrientationFactor * compareResult;
-        }
-
-        private int compareDate(long date, long dateOther) {
-            return date == dateOther
-                    ? 0
-                    : date < dateOther
-                    ? -1
-                    : 1;
-        }
-
-    }
 
 }

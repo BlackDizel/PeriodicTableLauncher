@@ -21,6 +21,7 @@ import org.byters.periodictablelauncher.view.presenter.PresenterFragmentApps;
 import org.byters.periodictablelauncher.view.presenter.PresenterFragmentBackground;
 import org.byters.periodictablelauncher.view.ui.Navigator;
 import org.byters.periodictablelauncher.view.ui.utils.TransitionsHelper;
+import org.byters.periodictablelauncher.view.util.HelperAppsCompare;
 import org.byters.periodictablelauncher.view.util.HelperStorage;
 import org.byters.periodictablelauncher.view.util.IHelperStorage;
 
@@ -38,6 +39,12 @@ public class AppModule {
 
     public AppModule(Application application) {
         this.refApplication = new WeakReference<>(application);
+    }
+
+    @Provides
+    @Singleton
+    HelperAppsCompare helperAppsCompare(){
+        return new HelperAppsCompare();
     }
 
     @Provides

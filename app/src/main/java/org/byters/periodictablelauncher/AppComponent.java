@@ -18,6 +18,7 @@ import org.byters.periodictablelauncher.view.ui.fragments.FragmentItemInfoBase;
 import org.byters.periodictablelauncher.view.ui.utils.AppInstallReceiver;
 import org.byters.periodictablelauncher.view.ui.utils.TransitionsHelper;
 import org.byters.periodictablelauncher.view.ui.utils.WallpaperChangedReceiver;
+import org.byters.periodictablelauncher.view.util.HelperAppsCompare;
 
 import javax.inject.Singleton;
 
@@ -64,4 +65,6 @@ public interface AppComponent {
     void inject(PresenterFragmentBackground presenterFragmentBackground);
 
     void inject(FragmentItemInfoBase fragmentItemInfoBase);
+
+    void inject(HelperAppsCompare helperAppsCompare);
 }
