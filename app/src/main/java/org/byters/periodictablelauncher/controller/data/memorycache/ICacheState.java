@@ -10,4 +10,8 @@ public interface ICacheState {
     void notifyWallpaperChange();
 
     void addListener(ICacheStateListener listener);
+
+    boolean isSettingsOpened();
+
+    void setSettingsOpened(boolean isOpenedNewState);
 }

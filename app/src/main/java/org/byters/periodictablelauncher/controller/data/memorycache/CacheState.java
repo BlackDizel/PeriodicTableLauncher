@@ -7,6 +7,7 @@ import java.util.WeakHashMap;
 public class CacheState implements ICacheState {
     private float scroll;
     private WeakHashMap<String, ICacheStateListener> listeners;
+    private boolean isSettingsOpened;
 
     @Override
     public float getScroll() {
@@ -38,5 +39,15 @@ public class CacheState implements ICacheState {
     public void addListener(ICacheStateListener listener) {
         if (listeners == null) listeners = new WeakHashMap<>();
         listeners.put(listener.getClass().getName(), listener);
+    }
+
+    @Override
+    public boolean isSettingsOpened() {
+        return isSettingsOpened;
+    }
+
+    @Override
+    public void setSettingsOpened(boolean isOpenedNewState) {
+        isSettingsOpened = isOpenedNewState;
     }
 }
