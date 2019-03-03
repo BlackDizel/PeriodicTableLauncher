@@ -1,7 +1,11 @@
 package org.byters.periodictablelauncher.controller.data.memorycache;
 
+import org.byters.periodictablelauncher.controller.data.memorycache.callback.ICachePreferencesListener;
+
 public interface ICachePreferences {
     int getColorIconDefault();
+
+    void setColorIconDefault(int color);
 
     boolean isShadowEnabled();
 
@@ -9,17 +13,17 @@ public interface ICachePreferences {
 
     int getSortOrientation();
 
+    void setSortOrientation(int sortOrientation);
+
     int getSortMethod();
-
-    int getAppListOrientation();
-
-    void setAppShadowVisibility(boolean isChecked);
-
-    void setColorIconDefault(int color);
-
-    void setAppListOrientation(int orientation);
 
     void setSortMethod(int sortMethod);
 
-    void setSortOrientation(int sortOrientation);
+    int getAppListOrientation();
+
+    void setAppListOrientation(int orientation);
+
+    void setAppShadowVisibility(boolean isChecked);
+
+    void addListener(ICachePreferencesListener listener);
 }
