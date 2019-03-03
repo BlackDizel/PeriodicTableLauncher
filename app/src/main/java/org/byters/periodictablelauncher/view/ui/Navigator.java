@@ -162,9 +162,7 @@ public class Navigator implements INavigator {
 
     private void setTransitionsShared(Fragment fragment) {
         TransitionSet transitionSet = new TransitionSet();
-        transitionSet.addTransition(new ChangeBounds());
         transitionSet.addTransition(new ChangeTransform());
-        transitionSet.addTransition(new ChangeClipBounds());
 
         fragment.setSharedElementEnterTransition(transitionSet);
         fragment.setSharedElementReturnTransition(transitionSet);
