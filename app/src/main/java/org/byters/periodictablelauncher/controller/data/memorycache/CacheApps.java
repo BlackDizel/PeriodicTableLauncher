@@ -8,10 +8,12 @@ import android.support.annotation.Nullable;
 import org.byters.periodictablelauncher.ApplicationLauncher;
 import org.byters.periodictablelauncher.model.AppDetail;
 import org.byters.periodictablelauncher.model.FileEnum;
+import org.byters.periodictablelauncher.view.util.HelperAppsCompare;
 import org.byters.periodictablelauncher.view.util.IHelperStorage;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.inject.Inject;
 
@@ -21,6 +23,9 @@ public class CacheApps extends CacheAppsBase implements ICacheApps {
 
     @Inject
     IHelperStorage helperStorage;
+
+    @Inject
+    HelperAppsCompare helperAppsCompare;
 
     @Inject
     WeakReference<Application> refApp;
@@ -98,6 +103,12 @@ public class CacheApps extends CacheAppsBase implements ICacheApps {
     public void setData(@Nullable ArrayList<AppDetail> result) {
         this.data = result;
         notifyListeners();
+    }
+
+    @Override
+    public void reloadDataCurrent() {
+        if (data == null) return;
+        Collections.sort(data, helperAppsCompare.getComparator());
     }
 
     public void storeData() {

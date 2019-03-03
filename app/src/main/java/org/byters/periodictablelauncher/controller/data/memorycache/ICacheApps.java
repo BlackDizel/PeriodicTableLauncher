@@ -57,4 +57,6 @@ public interface ICacheApps {
     ArrayList<AppDetail> getData();
 
     void setData(ArrayList<AppDetail> result);
+
+    void reloadDataCurrent();
 }
